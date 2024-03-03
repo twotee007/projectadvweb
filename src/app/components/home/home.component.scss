@@ -3,6 +3,13 @@ body {
     justify-content: space-around;
     align-items: center;
   }
+  .centered {
+    font-size: 30px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
   
   .voting-container {
     width: 30%;
