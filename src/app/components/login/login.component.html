@@ -14,10 +14,11 @@
                             <div class="flip-card__front">
                                 <div class="title font" style="color: rgb(51, 56, 153);">Log in</div>
                                 <div class="flip-card__form">
-                                    <input class="flip-card__input font" name="username" placeholder="Username" type="username" #usernameInput>
-                                    <input class="flip-card__input font" name="password" placeholder="Password" type="password" #passwordInput>
-                                    <button class="flip-card__btn font" (click)="loginuser(usernameInput.value, passwordInput.value)">Let`s go!</button>
+                                    <input class="flip-card__input font" name="username" placeholder="Username" type="text" #usernameInput>
+                                    <input class="flip-card__input font" name="password" placeholder="Password" type="password" #passwordInput (keydown.enter)="loginuser(usernameInput.value, passwordInput.value)">
+                                    <button class="flip-card__btn font" (click)="loginuser(usernameInput.value, passwordInput.value)">Let's go!</button>
                                 </div>
+                                
                             </div>
                             <div class="flip-card__back">
                                 <div class="title font " style="color: rgb(51, 56, 153);">Sign up</div>
