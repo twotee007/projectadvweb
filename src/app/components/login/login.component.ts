@@ -19,19 +19,26 @@ export class LoginComponent{
       singup : SignupData[] = [];
    
       async loginuser(username: string, password: string) {
-        this.userlogin = await this.catmashService.LoginUser(username, password);
-        if(this.userlogin.length > 0){
-          this.router.navigate(['']);
+        if (username.trim() === '' || password.trim() === '') {
+          alert("Username or password is not provided.");
+          return;
         }else{
-          console.log("Loging fill");
-          
+           this.userlogin = await this.catmashService.LoginUser(username, password);
+        if(this.userlogin.length > 0 ){
+            this.router.navigate(['']);
+        }else{
+          alert("Loging failed.");
+          }
         }
       }
       
       async signup(name: string, username: string, password: string, comfirmpassword: string) {
         if(password != comfirmpassword){
-           console.log("ไอมอส");
+           alert("กรุณากรอก password กับ comfirmpassword ให้เหมือนกัน");
             return;
+        }else if(name.trim() === '' || username.trim() === '' || password.trim() === '' || comfirmpassword.trim() === ''){
+          alert("กรุณากรอกให้ถูกต้อง");
+          return;
         }
         const type = 'user';
         try {
@@ -39,6 +46,7 @@ export class LoginComponent{
           this.loginuser(username,password);
         } catch (error) {
           console.error('Signup failed:', error);
+          alert("Signup failed");
         }
       }
 }
