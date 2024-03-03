@@ -1,0 +1,16 @@
+<app-header></app-header>
+<div class="ranking-container">
+    <h2>Player Ranking</h2>
+    <ul class="player-list">
+      <li class="player-item" *ngFor="let player of samplePlayers; let i = index">
+        <div class="player-details">
+          <span class="player-position">{{ i + 1 }}</span>
+          <img [src]="player.imageUrl" alt="{{ player.name }}" class="player-image">
+          <div class="player-info">
+            <span class="player-name">{{ player.name }}</span>
+            <span class="player-rating">Elo Rating: {{ player.eloRating }}</span>
+          </div>
+        </div>
+      </li>
+    </ul>
+</div>

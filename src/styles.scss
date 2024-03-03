@@ -1,1 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+html, body { height: 100%; }
+body { margin: 0;    font-family: 'Galindo', sans-serif;; color: rgb(51, 56, 153);}
+.font {
+    font-family: 'Chau Philomene One', sans-serif;
+  }
+  .fontfacemash{
+    font-family: 'Galindo', sans-serif;
+  }
+  .fontthai{
+    font-family: 'Sarabun', sans-serif;
+  }
+@import url('https://fonts.googleapis.com/css2?family=Gorditas:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Galindo&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sarabun:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');

@@ -1,0 +1,44 @@
+import { Component, OnInit } from '@angular/core';
+import {MatIconModule} from '@angular/material/icon';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { CatmashService } from '../../services/api/catmash.service';
+import { SignupData, User } from '../../model/signup_post';
+import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+@Component({
+  selector: 'app-login',
+  standalone: true,
+  imports: [MatInputModule,MatIconModule,MatFormFieldModule,CommonModule],
+  templateUrl: './login.component.html',
+  styleUrl: './login.component.scss'
+})
+export class LoginComponent{
+    constructor(private catmashService: CatmashService, private router: Router) {}
+      userlogin : User[] = [];
+      singup : SignupData[] = [];
+   
+      async loginuser(username: string, password: string) {
+        this.userlogin = await this.catmashService.LoginUser(username, password);
+        if(this.userlogin.length > 0){
+          this.router.navigate(['']);
+        }else{
+          console.log("Loging fill");
+          
+        }
+      }
+      
+      async signup(name: string, username: string, password: string, comfirmpassword: string) {
+        if(password != comfirmpassword){
+           console.log("ไอมอส");
+            return;
+        }
+        const type = 'user';
+        try {
+          this.singup = await this.catmashService.SignupUser(name, username, password, type);
+          this.loginuser(username,password);
+        } catch (error) {
+          console.error('Signup failed:', error);
+        }
+      }
+}

@@ -1,0 +1,29 @@
+body {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  
+  .voting-container {
+    width: 30%;
+    padding: 20px;
+  }
+  
+  .voting-container img {
+    margin-top: 10px !important;
+    margin: auto;
+    border-radius: 20px;
+    display: block;
+    max-width: 100%;
+    max-height: 200%;
+    cursor: pointer; /* เพิ่ม cursor เป็น pointer เมื่อคลิกได้ */
+  }
+  
+  .vs {
+    width: 100px; /* Adjust width as needed */
+  }
+  
+  .vs img {
+    width: 100%;
+    //filter: invert(26%) sepia(98%) saturate(7471%) hue-rotate(236deg) brightness(86%) contrast(119%);
+  }

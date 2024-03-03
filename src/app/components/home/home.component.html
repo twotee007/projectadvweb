@@ -1,0 +1,41 @@
+
+  <app-header></app-header>
+
+<body>
+  <div *ngIf="countdownSeconds > 0">
+    <p>โหวตครบทุกรูปแล้วจะสามารถโหวตใหม่ได้ในเวลา: {{ countdownSeconds }} วินาที</p>
+  </div>
+    <div class="voting-container">
+        <div *ngIf="show && selectedImages && selectedImages.length >= 2" >
+        <mat-card>
+          <mat-card-header>
+            <h3>{{selectedImages[0].name}}</h3>
+          </mat-card-header>
+          <mat-card-content>
+                <div class="image-container" (click)="onImageClick(0)">
+                  <img [src]="selectedImages[0].imgurl" alt="Image 1">
+                </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      </div>
+      <div *ngIf="show">
+      <div class="vs">
+        <img src="https://cdn-icons-png.flaticon.com/256/4499/4499401.png" alt="VS">
+      </div>
+    </div>
+      <div class="voting-container">
+        <div *ngIf="show && selectedImages && selectedImages.length >= 2">
+        <mat-card>
+          <mat-card-header>
+            <h3>{{selectedImages[1].name}}</h3>
+          </mat-card-header>
+          <mat-card-content>
+              <div class="image-container" (click)="onImageClick(1)">
+                <img [src]="selectedImages[1].imgurl" alt="Image 2">
+              </div>
+          </mat-card-content>
+        </mat-card>
+            </div>
+        </div>
+  </body>

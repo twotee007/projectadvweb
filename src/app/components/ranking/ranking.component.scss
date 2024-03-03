@@ -1,0 +1,61 @@
+/* Style for the ranking container */
+.ranking-container {
+    margin: 20px auto;
+    max-width: 600px;
+  }
+  
+  /* Style for the player list */
+  .player-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  /* Style for each player item */
+  .player-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+  }
+  
+  /* Style for player position */
+  .player-position {
+    font-weight: bold;
+    margin-right: 10px;
+  }
+  
+  /* Style for player image */
+  .player-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  /* Style for player details */
+  .player-details {
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Other styles remain the same */
+
+/* Style for player info */
+.player-info {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px; /* Adjust as needed */
+}
+
+/* Style for player name */
+.player-name {
+  font-weight: bold;
+  margin-bottom: 5px; /* Adjust as needed */
+}
+
+/* Style for player rating */
+.player-rating {
+  font-size: 0.9em; /* Adjust as needed */
+}

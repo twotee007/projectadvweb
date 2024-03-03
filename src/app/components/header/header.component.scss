@@ -1,0 +1,52 @@
+/* header.component.scss */
+@import url('https://fonts.googleapis.com/css2?family=Gorditas:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Galindo&display=swap');
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color:  rgb(51, 56, 153);
+    
+   
+  }
+
+  .logo  {
+    font-size: 20px;
+    height: auto;
+    color: rgb(255, 255, 255);
+    font-family: 'Galindo', sans-serif;
+  }
+  
+  .navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+   
+  }
+  
+  .navbar ul li {
+    display: inline;
+    margin-right: 20px;
+  }
+  
+  .navbar ul li:last-child {
+    margin-right: 0;
+  }
+  
+  .navbar ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px; /* ปรับขนาดไอคอนตามต้องการ */
+  }
+  
+  .navbar ul li a img {
+    padding: 5px;
+    width: 26px; /* ปรับขนาดของไอคอน */
+    height: auto;
+    vertical-align: middle; /* จัดตำแหน่งให้อยู่ตรงกลางของข้อความ */
+  }
+  .navbar ul li a:hover {
+    color: #ffd700;
+  }
+  
