@@ -15,9 +15,13 @@ export class CatmashService {
         const response = await lastValueFrom(this.http.get(url));
         return response as User[];
       }
+      public async GetloginUser(uid: number) {
+        const url = this.constants.API_ENDPOINT + "/login/" + uid;
+        const response = await lastValueFrom(this.http.get(url));
+        return response as User[];
+      }
 
-
-      public async SignupUser(name: string, username: string, password: string, type: string) {
+      public async SignupUser(name: string, username: string, password: string, type: string,image : string) {
         const url = this.constants.API_ENDPOINT + '/login/signup';
         const body = {
           username: username,

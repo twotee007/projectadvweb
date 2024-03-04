@@ -25,6 +25,7 @@ export class LoginComponent{
         }else{
            this.userlogin = await this.catmashService.LoginUser(username, password);
         if(this.userlogin.length > 0 ){
+            localStorage.setItem('user', JSON.stringify(this.userlogin));
             this.router.navigate(['']);
         }else{
           alert("Loging failed.");
@@ -42,11 +43,20 @@ export class LoginComponent{
         }
         const type = 'user';
         try {
-          this.singup = await this.catmashService.SignupUser(name, username, password, type);
+          this.singup = await this.catmashService.SignupUser(name, username, password, type,this.imageUrl);
           this.loginuser(username,password);
         } catch (error) {
           console.error('Signup failed:', error);
           alert("Signup failed");
+        }
+      }
+      imageUrl: string = "";
+      onImageSelected(event: any) {
+        const file = event.target.files[0];
+        if (file) {
+          const imageUrl = URL.createObjectURL(file);
+          this.imageUrl = imageUrl;
+          console.log(this.imageUrl); // ตรวจสอบค่าใน console
         }
       }
 }

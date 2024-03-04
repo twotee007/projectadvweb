@@ -2,9 +2,10 @@
     width: 120px;
     height: auto;
 }
-.imgpsize{
-    width: 90px;
-    height: auto;
+.imgpsize {
+  width: 90px;
+  height: 90px; /* กำหนดความสูงเท่ากับความกว้างเพื่อให้เป็นสี่เหลี่ยม */
+  object-fit: cover; /* ทำให้ภาพปรับตามขนาด container และตัดเอาส่วนที่เหลือ */
 }
 .bpro {
     width: 140px;
@@ -135,6 +136,7 @@
     height: 100%;
 }
 .imgaddphosize{
-  width: 400px;
-  height: auto;
+  width: 300px;
+  height: 300px;
+  object-fit: cover; /* ทำให้ภาพปรับตามขนาด container และตัดเอาส่วนที่เหลือ */
 }

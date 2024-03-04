@@ -245,3 +245,33 @@
     80% { opacity: 1; }
     100% { opacity: 0; }
   }
+  .imgpsize {
+    width: 90px;
+    height: 90px; /* กำหนดความสูงเท่ากับความกว้างเพื่อให้เป็นสี่เหลี่ยม */
+    object-fit: cover; /* ทำให้ภาพปรับตามขนาด container และตัดเอาส่วนที่เหลือ */
+}
+.bfile {
+  width: 140px;
+  height: 40px;
+  border: 3px solid rgb(51, 56, 153);
+  border-radius: 45px;
+  transition: all 0.3s;
+  cursor: pointer;
+  background: white;
+  font-size: 0.9em;
+  font-weight: 550;
+  font-family: 'Montserrat', sans-serif;
+  color: rgb(51, 56, 153);
+}
+
+.bfile:hover {
+  background: rgb(51, 56, 153);
+  color: white;
+  font-size: 1.0em;
+}
+.bfile-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}

@@ -7,6 +7,7 @@ import { HeaderComponent } from '../header/header.component';
 import { Getimgservice } from '../../services/api/Getimg.service';
 import { GetImg } from '../../model/Img';
 import { Router } from '@angular/router';
+import { User } from '../../model/signup_post';
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -27,8 +28,13 @@ export class HomeComponent {
       votedImagesCount: number = 0;
       countdownSeconds: number = 0;
       show : boolean = true;
+      User : User[] = [];
       ngOnInit():void {
         this.loadImg();
+        if (localStorage.getItem('user')) {
+          this.User = JSON.parse(localStorage.getItem('user')!);
+          console.log(this.User);
+        }
       }
 
       async loadImg(){
@@ -60,8 +66,8 @@ export class HomeComponent {
     
         return images;
       }
-      onImageClick(winnerIndex: number) { //1
-        const winnerImage = this.selectedImages[winnerIndex]; // 1
+      onImageClick(winnerIndex: number) { 
+        const winnerImage = this.selectedImages[winnerIndex]; 
         const loserIndex = winnerIndex === 0 ? 1 : 0;
         const loserImage = this.selectedImages[loserIndex];
 
@@ -147,7 +153,6 @@ export class HomeComponent {
           await this.getimg.Updateimg(winner.imgid,winner.score);
           await this.getimg.Updateimg(loser.imgid,loser.score);
         }
-        console.log("loser : ",loserNewRating);
       }
       
 }

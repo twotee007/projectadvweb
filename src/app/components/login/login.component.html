@@ -23,11 +23,18 @@
                             <div class="flip-card__back">
                                 <div class="title font " style="color: rgb(51, 56, 153);">Sign up</div>
                                 <div class="flip-card__form">
+                                    <img [src]="imageUrl" alt="" class="imgpsize rounded-circle mx-auto">
+                                    <label for="imageInput" class="pointer">
+                                    <div class="bfile fontthai" style="margin-left: 5px; cursor: pointer;">
+                                        <div class="bfile-container">Change img</div>
+                                    </div>
+                                    <input type="file" id="imageInput" style="display: none;" (change)="onImageSelected($event)">
+                                    </label>
                                     <input class="flip-card__input font" name="name" placeholder="name" type="name" #nameInput>
                                     <input class="flip-card__input font" name="username" placeholder="Username" type="username" #usernameInputt>
                                     <input class="flip-card__input font" name="password" placeholder="password" type="password" #passwordInputt>
                                     <input class="flip-card__input font" name="comfirmpassword" placeholder="Confirm password" type="password" #comfirmpasswordInput>
-                                    <button class="flip-card__btn font" (click)="signup(nameInput.value,usernameInputt.value,passwordInputt.value,comfirmpasswordInput.value)">Confirm!</button>
+                                    <button class="flip-card__btn font" (keydown.enter)="signup(nameInput.value,usernameInputt.value,passwordInputt.value,comfirmpasswordInput.value)">Confirm!</button>
                                 </div>
                             </div>
                         </div>
