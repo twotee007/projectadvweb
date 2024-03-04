@@ -74,8 +74,9 @@ export class HomeComponent {
         winnerImage.isWinner = true;
         loserImage.isLoser = false;
 
-        const expectedWinnerProbability = this.calculateExpectedProbability(winnerImage.score, loserImage.score);
-        this.updateElo(winnerImage, loserImage, expectedWinnerProbability);
+        const expectedWinnerProbability = this.getExpectedScore(winnerImage.score, loserImage.score);
+        const expectedLoserProbability = this.getExpectedScore(loserImage.score, winnerImage.score);
+        this.updateElo(winnerImage, loserImage, expectedWinnerProbability,expectedLoserProbability);
 
         this.votedImagesIds.add(winnerImage.imgid);
         this.votedImagesIds.add(loserImage.imgid);
@@ -115,17 +116,20 @@ export class HomeComponent {
           return 32; 
         }
       }
-      calculateExpectedProbability(ratingA: number, ratingB: number) {
-        return 1 / (1 + Math.pow(10, (ratingB - ratingA) / 400)); //ค่าความคาดหวังเหมือนมึงคาดหวังแล้วเป็นได้แค่พี่น้อง
+
+      getExpectedScore(ratingA: number, ratingB: number) {
+        return 1 / (1 + Math.pow(10, (ratingB - ratingA) / 400));
       }
-      async updateElo(winner: GetImg, loser: GetImg, expectedProbability: number) {
+
+      async updateElo(winner: GetImg, loser: GetImg, expectedwinProbability: number,expectedLoserProbability : number) {
         const actualWinnerProbability = 1; // ผลการโหวตจริง (คือชนะ)
+        const actualLoserProbability = 0; // ผลการโหวตจริง (คือชนะ)
         const kFactorWinner = this.calculateKFactor(winner.score); // นำเข้าค่า K Factor ตามคะแนนปัจจุบันของ winner
         const kFactorLoser = this.calculateKFactor(loser.score); // นำเข้าค่า K Factor ตามคะแนนปัจจุบันของ loser
       
         // คำนวณคะแนนใหม่สำหรับ winner และ loser
-        const winnerNewRating = Math.round(kFactorWinner * (actualWinnerProbability - expectedProbability));
-        const loserNewRating = Math.round(kFactorLoser * ((actualWinnerProbability - 1) - expectedProbability));
+        const winnerNewRating = Math.round(kFactorWinner * (actualWinnerProbability - expectedwinProbability));
+        const loserNewRating = Math.round(kFactorLoser * (actualLoserProbability - expectedLoserProbability));
         console.log("winnerNewRating : "+winnerNewRating);
         console.log("loserNewRating : "+loserNewRating);        
 
