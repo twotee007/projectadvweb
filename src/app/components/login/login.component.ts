@@ -43,7 +43,7 @@ export class LoginComponent{
         }
         const type = 'user';
         try {
-          this.singup = await this.catmashService.SignupUser(name, username, password, type,this.imageUrl);
+          this.singup = await this.catmashService.SignupUser(name, username, password, type);
           this.loginuser(username,password);
         } catch (error) {
           console.error('Signup failed:', error);
