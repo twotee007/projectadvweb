@@ -3,6 +3,10 @@ body {
     justify-content: space-around;
     align-items: center;
   }
+  mat-card{
+    border-radius: 10px;
+    background-color: rgba(197, 197, 190, 0.814);
+  }
   .centered {
     font-size: 30px;
     position: fixed;
