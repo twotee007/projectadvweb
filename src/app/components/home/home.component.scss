@@ -24,8 +24,14 @@ body {
     width: 90%;
     height: 150%;
     cursor: pointer;
-    object-fit: cover; /* เพิ่ม object-fit: cover; */
+    object-fit: cover;
+    transition: transform 0.3s; /* เพิ่มการเปลี่ยนแปลงที่น่าสนใจเมื่อ hover */
 }
+
+.voting-container img:hover {
+    transform: scale(1.08); /* เพิ่มการขยายขนาดของรูปภาพเมื่อ hover */
+}
+
 
   
   .vs {
@@ -35,4 +41,22 @@ body {
   .vs img {
     width: 100%;
     //filter: invert(26%) sepia(98%) saturate(7471%) hue-rotate(236deg) brightness(86%) contrast(119%);
+  }
+  footer {
+    text-align: center;
+    margin-top: 50px; /* ปรับตำแหน่งของ footer ให้อยู่ห่างจากเนื้อหาด้านบน */
+    background-color: #f0f0f0; /* เปลี่ยนสีพื้นหลังของ footer */
+    padding: 20px;
+  }
+  
+  footer address {
+    margin-bottom: 10px; /* ปรับระยะห่างของที่อยู่ใน footer */
+  }
+  
+  footer div {
+    margin-top: 10px; /* ปรับระยะห่างของส่วนที่ให้ข้อความเพิ่มเติม */
+  }
+  
+  footer p {
+    margin: 5px 0; /* ปรับระยะห่างของย่อหน้าใน footer */
   }

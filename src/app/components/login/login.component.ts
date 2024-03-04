@@ -35,10 +35,10 @@ export class LoginComponent{
       
       async signup(name: string, username: string, password: string, comfirmpassword: string) {
         if(password != comfirmpassword){
-           alert("กรุณากรอก password กับ comfirmpassword ให้เหมือนกัน");
+           alert("กรุณากรอก password กับ comfirmpassword ให้ถูกต้อง");
             return;
         }else if(name.trim() === '' || username.trim() === '' || password.trim() === '' || comfirmpassword.trim() === ''){
-          alert("กรุณากรอกให้ถูกต้อง");
+          alert("Please fill out the information completely.");
           return;
         }
         const type = 'user';

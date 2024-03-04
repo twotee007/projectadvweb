@@ -14,9 +14,9 @@
         <li><a href="#"><img src="https://cdn-icons-png.flaticon.com/256/478/478544.png" alt="graph">graph</a></li>
         <li><a routerLink="/profile"><img src="https://cdn-icons-png.flaticon.com/256/1144/1144760.png" alt="Profile">Profile</a></li>
         <ng-container *ngIf="this.User.length; else nologin">
-          <li><a  (click)="Logout()"><img src="https://cdn-icons-png.flaticon.com/256/1828/1828427.png" alt="Logout">Logout</a></li>
-
-      </ng-container>
+          <li><a (click)="Logout()" style="cursor: pointer;"><img src="https://cdn-icons-png.flaticon.com/256/1828/1828427.png" alt="Logout">Logout</a></li>
+        </ng-container>
+        
       <ng-template #nologin>
           <li><a routerLink="/login"><img src="https://cdn-icons-png.flaticon.com/256/1828/1828427.png" alt="Logout">Login</a></li>
       </ng-template>
