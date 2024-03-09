@@ -1,14 +1,27 @@
 <app-header></app-header>
 <div class="ranking-container">
-    <h2>Player Ranking</h2>
+    <h2 class="slide-up">Top 10 Ranking</h2>
     <ul class="player-list">
-        <li class="player-item" *ngFor="let player of playerRankings; let i = index">
+        <li class="player-item" *ngFor="let player of rank; let i = index">
             <div class="player-details">
                 <span class="player-position">{{ i + 1 }}</span>
                 <!-- ใช้ *ngFor เพื่อวนลูปผ่าน playerRankings -->
                 <img [src]="player.imgurl" alt="{{ player.name }}" class="player-image">
                 <div class="player-info">
                     <span class="player-name">{{ player.name }}</span>
+                    <div *ngIf="player.rankingyesterday && player.rankingtoday < player.rankingyesterday; else down">
+                        <h6>Up {{player.rankdifferent}}</h6>
+                    </div>
+                    <ng-template #down>
+                        <div *ngIf="player.rankingyesterday && player.rankingtoday > player.rankingyesterday; else NoDiffer">
+                            <h6>Down {{-player.rankdifferent}}</h6>
+                        </div>
+                    </ng-template>
+                    <ng-template #NoDiffer>
+                        <div *ngIf="player.rankingyesterday && player.rankingtoday === player.rankingyesterday;">
+                            <h6>NoDifferRank {{player.rankdifferent}}</h6>
+                        </div>
+                    </ng-template>
                     <span class="player-rating">Elo Rating: {{ player.score }}</span>
                 </div>
             </div>

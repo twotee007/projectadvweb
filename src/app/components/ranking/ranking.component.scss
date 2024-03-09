@@ -60,3 +60,17 @@
 .player-rating {
   font-size: 0.9em; /* Adjust as needed */
 }
+@keyframes slideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ranking-container h2.slide-up {
+  animation: slideUp 0.5s ease-out;
+}

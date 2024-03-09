@@ -7,8 +7,14 @@ export interface GetImg {
     isWinner: boolean;
     isLoser: boolean;
 }
-export interface Scoreimg {
-    scorewinner:  number;
-    scoreloser:  number;
+export interface Getranktoday {
+    imgid:            number;
+    imgurl:           string;
+    name:             string;
+    score:            number;
+    uid:              number;
+    rankingyesterday : number;
+    rankingtoday :     number;
+    rankdifferent : number;
 }
 
