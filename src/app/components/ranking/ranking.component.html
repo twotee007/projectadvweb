@@ -9,22 +9,24 @@
                 <img [src]="player.imgurl" alt="{{ player.name }}" class="player-image">
                 <div class="player-info">
                     <span class="player-name">{{ player.name }}</span>
-                    <div *ngIf="player.rankingyesterday && player.rankingtoday < player.rankingyesterday; else down">
-                        <h6>Up {{player.rankdifferent}}</h6>
+                    <div class="all"  [ngClass]="{'up-arrow': player.rankingtoday < player.rankingyesterday, 'down-arrow': player.rankingtoday > player.rankingyesterday} ">
+                        <h6  *ngIf="player.rankingyesterday && player.rankingtoday !== player.rankingyesterday">
+                            <ng-container *ngIf="player.rankingtoday < player.rankingyesterday" class="arrow-container">
+                                <img src="https://media.discordapp.net/attachments/1063306270003703878/1216061406294839346/down.png?ex=65ff0470&is=65ec8f70&hm=eef8f7377ebd28846539930edd2a3fb9b3dfdb8d293e9a79f9c13c55f9819037&=&format=webp&quality=lossless&width=160&height=160" alt="Up arrow" class="arrow-icon">  {{ player.rankdifferent }}
+                            </ng-container>
+                            <ng-container *ngIf="player.rankingtoday > player.rankingyesterday";   class="arrow-container" >
+                                <img src="https://cdn-icons-png.flaticon.com/256/5548/5548156.png" alt="Down arrow" class="arrow-icon"> {{ -player.rankdifferent }}
+                            </ng-container>
+                           
+                        </h6>
                     </div>
-                    <ng-template #down>
-                        <div *ngIf="player.rankingyesterday && player.rankingtoday > player.rankingyesterday; else NoDiffer">
-                            <h6>Down {{-player.rankdifferent}}</h6>
-                        </div>
-                    </ng-template>
-                    <ng-template #NoDiffer>
-                        <div *ngIf="player.rankingyesterday && player.rankingtoday === player.rankingyesterday;">
-                            <h6>NoDifferRank {{player.rankdifferent}}</h6>
-                        </div>
-                    </ng-template>
                     <span class="player-rating">Elo Rating: {{ player.score }}</span>
                 </div>
+                
             </div>
+           
         </li>
+        
     </ul>
 </div>
+
