@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Constants } from '../../config/constans';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { lastValueFrom } from 'rxjs';
-import { GetImg, Getranktoday } from '../../model/Img';
+import { GetImg, Getranktoday, VoteImg } from '../../model/Img';
 @Injectable({
   providedIn: 'root'
 })
@@ -54,5 +54,10 @@ export class Getimgservice {
         const url = this.constants.API_ENDPOINT + "/rank/yesterday";
         const response = await lastValueFrom(this.http.get(url));
         return response as Getranktoday[];
+      }
+      public async GetGraph(uid: number) {
+        const url = this.constants.API_ENDPOINT + "/rank/graph/" + uid;
+        const response = await lastValueFrom(this.http.get(url));
+        return response as VoteImg[];
       }
 }

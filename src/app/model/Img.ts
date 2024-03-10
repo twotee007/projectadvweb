@@ -18,3 +18,11 @@ export interface Getranktoday {
     rankdifferent : number;
 }
 
+export interface VoteImg {
+    voteDate: string;
+    totalScore: string;
+    imgid: number;
+    name : string;
+    imgurl : string;
+}
+

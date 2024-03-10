@@ -1,0 +1,26 @@
+/* graph.component.scss */
+
+.chart-container-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap; /* Allow items to wrap to the next line */
+    margin-top: 120px;
+  }
+  
+  .chart-container {
+    width: 600px;
+    height: 300px;
+    margin-right: 20px; /* Adjust the margin between the chart and images */
+    margin-bottom: 20px; /* Adjust the margin between rows */
+  }
+  
+  .image-container {
+    display: flex;
+  }
+  
+  .image-item {
+    margin-right: 10px; /* Adjust the margin between images */
+    margin-bottom: 10px; /* Adjust the margin between rows */
+  }
+  

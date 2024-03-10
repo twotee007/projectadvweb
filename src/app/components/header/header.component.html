@@ -11,7 +11,7 @@
         
         <li><a routerLink=""><img src="https://cdn.icon-icons.com/icons2/1660/PNG/512/3844470-home-house_110332.png" alt="Home">Home</a></li>
         <li><a routerLink="/ranking"><img src="https://cdn-icons-png.flaticon.com/256/747/747274.png" alt="Ranking">Ranking</a></li>
-        <li><a href="#"><img src="https://cdn-icons-png.flaticon.com/256/478/478544.png" alt="graph">graph</a></li>
+        <li><a routerLink="/graph"><img src="https://cdn-icons-png.flaticon.com/256/478/478544.png" alt="graph">graph</a></li>
         <li><a routerLink="/profile"><img src="https://cdn-icons-png.flaticon.com/256/1144/1144760.png" alt="Profile">Profile</a></li>
         <ng-container *ngIf="this.User.length; else nologin">
           <li><a (click)="Logout()" style="cursor: pointer;"><img src="https://cdn-icons-png.flaticon.com/256/1828/1828427.png" alt="Logout">Logout</a></li>
