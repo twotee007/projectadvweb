@@ -1,3 +1,5 @@
+
+
 export interface GetImg {
     imgid:  number;
     imgurl: string;
