@@ -67,16 +67,10 @@ export class GraphComponent implements OnInit, AfterViewInit {
           labels: labels,
           datasets: [
             {
-              label: 'คะแนน +',
+              label: 'คะแนนในแต่ละวัน',
               data: data,
-              borderWidth: 1,
-              pointRadius: 10,
-            },
-            {
-              label: 'คะแนน -',
-              data: [100,200,300],
-              borderWidth: 1,
-              pointRadius: 10,
+              borderWidth: 2,
+              pointRadius: 8,
             },
           ],
         },

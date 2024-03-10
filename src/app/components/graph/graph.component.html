@@ -1,6 +1,6 @@
 <app-header></app-header>
 
-<ng-container *ngIf="getimg.length > 0; else nologin">
+<ng-container *ngIf=" getimg && getimg.length > 0; else nologin">
   <div class="chart-container-wrapper container">
     <div *ngFor="let img of getimg" class="row chart-and-image-container">
       <div class="chart-container">
