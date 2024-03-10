@@ -1,17 +1,22 @@
 <app-header></app-header>
-
-<ng-container *ngIf=" getimg && getimg.length > 0; else nologin">
-  <div class="chart-container-wrapper container">
+<h2 class="slide-up" style="margin-top: 100px; text-align: center;">graph</h2>
+<div class="wrapper">
+  <div *ngIf="isLoading" class="loading">Loading...</div>
+  <div *ngIf="!isLoading && getimg && getimg.length > 0" class="chart-container-wrapper container">
     <div *ngFor="let img of getimg" class="row chart-and-image-container">
       <div class="chart-container">
+        <h2 style="margin-top: 20px; text-align: center;">{{ img.name }}</h2>
         <canvas [id]="'myChart' + img.imgid" #chartCanvas></canvas>
-        <div class="image-container">
-          <img class="image-item" src="{{img.imgurl}}" alt="" loading="lazy">
-        </div>
+      </div>
+      <div class="image-container">
+        <img class="image-item" src="{{img.imgurl}}" alt="" loading="lazy">
       </div>
     </div>
   </div>
-</ng-container>
-<ng-template #nologin>
-  <h1 style="margin-top: 100px;">ยังไม่มีรูปภาพ</h1>
-</ng-template>
+</div>
+
+<div *ngIf="!isLoading && (!getimg || getimg.length === 0)" class="centered-content">
+  <h1 class="slide-up-text" style="font-size: 20px;">User has not logged in yet. Please log in first to view the graph page.</h1>
+   <button routerLink="/login" class="slide-up-button">Go to Login</button>
+</div>
+

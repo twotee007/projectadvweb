@@ -5,11 +5,11 @@ import { Getimgservice } from '../../services/api/Getimg.service';
 import { User } from '../../model/signup_post';
 import { Chart } from 'chart.js/auto';
 import { CommonModule } from '@angular/common';
-
+import { Router, RouterModule } from '@angular/router';
 @Component({
   selector: 'app-graph',
   standalone: true,
-  imports: [HeaderComponent, CommonModule],
+  imports: [HeaderComponent, CommonModule,RouterModule ],
   templateUrl: './graph.component.html',
   styleUrls: ['./graph.component.scss'],
 })
@@ -17,8 +17,9 @@ export class GraphComponent implements OnInit, AfterViewInit {
   @ViewChild('chartCanvas', { static: false }) chartCanvas!: ElementRef;
 
   getimg: VoteImg[] = [];
+  isLoading: boolean = true;
 
-  constructor(private getimgservice: Getimgservice) {}
+  constructor(private getimgservice: Getimgservice ,private router: Router) {}
 
   ngOnInit(): void {
     this.loadData();
@@ -34,6 +35,8 @@ export class GraphComponent implements OnInit, AfterViewInit {
       }
     } catch (error) {
       console.error('Error loading data:', error);
+    } finally {
+      this.isLoading = false; // Set loading state to false when data loading is complete
     }
   }
 
@@ -83,11 +86,11 @@ export class GraphComponent implements OnInit, AfterViewInit {
           plugins: {
             title: {
               display: true,
-              text: img.name,
             },
           },
         },
       });
     }
   }
-}  
+  
+}
