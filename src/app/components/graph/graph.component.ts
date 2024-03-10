@@ -1,63 +1,67 @@
-import { Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { HeaderComponent } from '../header/header.component';
 import { VoteImg } from '../../model/Img';
 import { Getimgservice } from '../../services/api/Getimg.service';
 import { User } from '../../model/signup_post';
-import { Chart } from 'chart.js/auto'; // Change this import statement
+import { Chart } from 'chart.js/auto';
 import { CommonModule } from '@angular/common';
+
 @Component({
   selector: 'app-graph',
   standalone: true,
-  imports: [HeaderComponent,CommonModule],
+  imports: [HeaderComponent, CommonModule],
   templateUrl: './graph.component.html',
-  styleUrls: ['./graph.component.scss'], 
+  styleUrls: ['./graph.component.scss'],
 })
-export class GraphComponent implements OnInit {
-  @ViewChild('chartContainer') chartContainer!: ElementRef;
-  imgIds: any;
+export class GraphComponent implements OnInit, AfterViewInit {
+  @ViewChild('chartCanvas', { static: false }) chartCanvas!: ElementRef;
+
+  getimg: VoteImg[] = [];
+
   constructor(private getimgservice: Getimgservice) {}
-  User: User[] = [];
-  getimg : VoteImg[] = [];
-  async ngOnInit(): Promise<void> {
-    if (localStorage.getItem('user')) {
-      this.User = JSON.parse(localStorage.getItem('user')!);
-      console.log(this.User);
-    }
-    this.getimg = await this.getimgservice.GetGraph(this.User[0].uid);
-    console.log(this.getimg);
-    this.graph(this.getimg);
+
+  ngOnInit(): void {
+    this.loadData();
   }
-  graph(imggrap: VoteImg[]) {
-    for (let i = 0; i < imggrap.length; i++) {
-      const id = `myChart${imggrap[i].imgid}`; // ตรวจสอบให้แน่ใจว่า id แต่ละตัวมีความเฉพาะ
-      const existingCanvas = document.getElementById(id);
-  
-      // Reset labels and data arrays for each iteration
-      const labels = [];
-      const data = [];
+
+  async loadData(): Promise<void> {
+    try {
+      const user = JSON.parse(localStorage.getItem('user')!);
+      if (user) {
+        this.getimg = await this.getimgservice.GetGraph(user[0].uid);
+        console.log('getimg:', this.getimg);
+        this.ngAfterViewInit();
+      }
+    } catch (error) {
+      console.error('Error loading data:', error);
+    }
+  }
+
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      if (this.getimg && this.getimg.length > 0) {
+        this.createCharts();
+      }
+    }, 0);
+  }
+
+  createCharts(): void {
+    for (const img of this.getimg) {
+      const id = `myChart${img.imgid}`;
+      const existingCanvas = document.getElementById(id) as HTMLCanvasElement;
   
       if (!existingCanvas) {
-        const voteDateArray = imggrap[i].voteDate.split(',');
-        const totalScoreArray = imggrap[i].totalScore.split(',').map(Number);
-  
-        for (let j = 0; j < Math.min(voteDateArray.length, totalScoreArray.length); j++) {
-          labels.push(voteDateArray[j]);
-          data.push(totalScoreArray[j]);
-        }
-  
-        const canvasContainer = document.createElement('div');
-        canvasContainer.style.width = '600px';
-        canvasContainer.style.height = '300px';
-        canvasContainer.style.marginBottom= '50px';
-
-        const canvas = document.createElement('canvas');
-        canvas.id = id;
-        canvasContainer.appendChild(canvas);
-
-        this.chartContainer.nativeElement.appendChild(canvasContainer);
+        console.error(`Canvas element with id '${id}' not found.`);
+        continue; // Skip to the next iteration if canvas element is not found
       }
   
-      new Chart(id, {
+      const voteDateArray = img.voteDate.split(',');
+      const totalScoreArray = img.totalScore.split(',').map(Number);
+  
+      const labels = voteDateArray;
+      const data = totalScoreArray;
+  
+      new Chart(existingCanvas, {
         type: 'line',
         data: {
           labels: labels,
@@ -73,26 +77,23 @@ export class GraphComponent implements OnInit {
               data: [100,200,300],
               borderWidth: 1,
               pointRadius: 10,
-            }
+            },
           ],
         },
         options: {
           responsive: true,
-        interaction: {
-          mode: 'index',
-          intersect: false,
+          interaction: {
+            mode: 'index',
+            intersect: false,
+          },
+          plugins: {
+            title: {
+              display: true,
+              text: img.name,
+            },
+          },
         },
-        plugins: {
-          title: {
-            display: true,
-            text: imggrap[i].name
-          }
-        },
-        
-      },
       });
     }
   }
-
-
-}
+}  

@@ -1,17 +1,17 @@
 <app-header></app-header>
-<!-- graph.component.html -->
 
-<div class="chart-container-wrapper">
-      <div #chartContainer class="chart-container"><img src="" alt=""></div>
-      <div *ngFor="let img of getimg" class="chart-and-image-container">
-      <div class="image-container">
+<ng-container *ngIf="getimg.length > 0; else nologin">
+  <div class="chart-container-wrapper container">
+    <div *ngFor="let img of getimg" class="row chart-and-image-container">
+      <div class="chart-container">
+        <canvas [id]="'myChart' + img.imgid" #chartCanvas></canvas>
+        <div class="image-container">
+          <img class="image-item" src="{{img.imgurl}}" alt="" loading="lazy">
+        </div>
       </div>
     </div>
   </div>
-  
-  
-  
-
-  
-  
-  
+</ng-container>
+<ng-template #nologin>
+  <h1 style="margin-top: 100px;">ยังไม่มีรูปภาพ</h1>
+</ng-template>
