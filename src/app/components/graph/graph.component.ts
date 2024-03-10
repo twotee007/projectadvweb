@@ -48,7 +48,7 @@ export class GraphComponent implements OnInit {
         const canvasContainer = document.createElement('div');
         canvasContainer.style.width = '600px';
         canvasContainer.style.height = '300px';
-        canvasContainer.style.marginBottom = '50px';
+        canvasContainer.style.marginBottom= '50px';
 
         const canvas = document.createElement('canvas');
         canvas.id = id;
@@ -63,20 +63,33 @@ export class GraphComponent implements OnInit {
           labels: labels,
           datasets: [
             {
-              label: imggrap[i].name,
+              label: 'คะแนน +',
               data: data,
               borderWidth: 1,
+              pointRadius: 10,
             },
+            {
+              label: 'คะแนน -',
+              data: [100,200,300],
+              borderWidth: 1,
+              pointRadius: 10,
+            }
           ],
         },
         options: {
-          aspectRatio: 0, // ปรับตามที่ต้องการ
-          scales: {
-            y: {
-              beginAtZero: true,
-            },
-          },
+          responsive: true,
+        interaction: {
+          mode: 'index',
+          intersect: false,
         },
+        plugins: {
+          title: {
+            display: true,
+            text: imggrap[i].name
+          }
+        },
+        
+      },
       });
     }
   }
