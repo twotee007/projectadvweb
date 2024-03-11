@@ -4,8 +4,9 @@ import { VoteImg } from '../../model/Img';
 import { Getimgservice } from '../../services/api/Getimg.service';
 import { User } from '../../model/signup_post';
 import { Chart } from 'chart.js/auto';
-import { CommonModule } from '@angular/common';
+import { CommonModule, formatDate } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
+import { format } from 'mysql';
 @Component({
   selector: 'app-graph',
   standalone: true,
@@ -52,17 +53,23 @@ export class GraphComponent implements OnInit, AfterViewInit {
     for (const img of this.getimg) {
       const id = `myChart${img.imgid}`;
       const existingCanvas = document.getElementById(id) as HTMLCanvasElement;
-  
+     
+      
       if (!existingCanvas) {
         console.error(`Canvas element with id '${id}' not found.`);
         continue; // Skip to the next iteration if canvas element is not found
       }
-  
+      const currentDate = new Date();
+      const sevenDaysAgo = new Date(currentDate);
+      sevenDaysAgo.setDate(currentDate.getDate() - 6);
+
       const voteDateArray = img.voteDate.split(',');
       const totalScoreArray = img.totalScore.split(',').map(Number);
   
-      const labels = voteDateArray;
-      const data = totalScoreArray;
+      const labels = this.generateDateLabels(sevenDaysAgo);
+      // const data = totalScoreArray;
+      // const labels = voteDateArray;
+      const data = this.generateDataArray(voteDateArray, totalScoreArray, sevenDaysAgo);
   
       new Chart(existingCanvas, {
         type: 'line',
@@ -92,5 +99,30 @@ export class GraphComponent implements OnInit, AfterViewInit {
       });
     }
   }
-  
+  generateDateLabels(sevenDaysAgo: Date): string[] {
+  const labels = [];
+  for (let i = 0; i < 7; i++) {
+    const date = new Date(sevenDaysAgo);
+    date.setDate(sevenDaysAgo.getDate() + i);
+    labels.push(date.toISOString().split('T')[0]);
+  }
+  return labels;
+}
+generateDataArray(voteDateArray: string[], totalScoreArray: number[], sevenDaysAgo: Date): number[] {
+  const data = [];
+
+  for (let i = 0; i < 7; i++) {
+    const currentDate = new Date(sevenDaysAgo);
+    currentDate.setDate(sevenDaysAgo.getDate() + i);
+
+    const index = voteDateArray.indexOf(currentDate.toISOString().split('T')[0]);
+    if (index !== -1) {
+      data.push(totalScoreArray[index]);
+    } else {
+      data.push(0);
+    }
+  }
+
+  return data;
+}
 }
