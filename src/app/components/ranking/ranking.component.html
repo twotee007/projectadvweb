@@ -2,7 +2,7 @@
 <div class="ranking-container">
     <h2 class="slide-up">Top 10 Ranking</h2>
     <ul class="player-list">
-        <li class="player-item" *ngFor="let player of rank; let i = index">
+        <li class="player-item" *ngFor="let player of rank; let i = index" (mouseenter)="onSelectPlayer(player)" (mouseleave)="onMouseLeave()">
             <div class="player-details">
                 <span class="player-position">{{ i + 1 }}</span>
                 <!-- ใช้ *ngFor เพื่อวนลูปผ่าน playerRankings -->
@@ -28,5 +28,15 @@
         </li>
         
     </ul>
+    <div class="popup-container" *ngIf="selectedPlayer">
+        <div class="popup-content">
+            <img [src]="selectedPlayer.imgurl" alt="{{ selectedPlayer.name }}" class="popup-image">
+            <div class="popup-details">
+                <span class="popup-name">{{ selectedPlayer.name }}</span>
+                <span class="popup-position">Position: {{ selectedPlayer.name }}</span>
+                <span class="popup-rating">Elo Rating: {{ selectedPlayer.score }}</span>
+            </div>
+        </div>
+    </div>
 </div>
 

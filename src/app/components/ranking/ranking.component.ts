@@ -18,10 +18,12 @@ export class RankingComponent implements OnInit {
     todayrank : Getranktoday[] =[];
     yesterdayrank : Getranktoday[] =[];
     rank : Getranktoday[] = [];
+    selectedPlayer: any;
     constructor(private getimgservice: Getimgservice) {}
 
     ngOnInit(): void {
         this.loadPlayerRankings(); // เรียกเมธอดเมื่อคอมโพเนนต์ถูกโหลด
+       
     }
 
     async loadPlayerRankings() {
@@ -40,4 +42,11 @@ export class RankingComponent implements OnInit {
         }
         console.log(this.rank);
     }
-}
+    onSelectPlayer(player: any) {
+        this.selectedPlayer = player;
+      }
+      onMouseLeave() {
+        this.selectedPlayer = null;
+    }
+    }
+

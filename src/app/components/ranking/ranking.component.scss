@@ -92,3 +92,44 @@
 }
 
 
+.popup-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* เพื่อทำให้พื้นหลังมืดลง */
+}
+
+.popup-content {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.popup-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 5%;
+  margin-right: 20px;
+}
+
+.popup-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.popup-name {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.popup-rating {
+  font-size: 16px;
+  color: #555;
+}
