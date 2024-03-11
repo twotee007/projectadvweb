@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import {MatIconModule} from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { HeaderComponent } from '../header/header.component';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [MatIconModule,FormsModule,HeaderComponent],
+  imports: [MatIconModule,FormsModule,HeaderComponent,MatProgressBarModule],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'
 })

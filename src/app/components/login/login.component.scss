@@ -275,3 +275,10 @@
   align-items: center;
   height: 100%;
 }
+$custom-snackbar-background:  #e9e6e6; /* แทน YourBackgroundColor ด้วยสีที่คุณต้องการ */
+$custom-snackbar-text-color:rgb(51, 56, 153); /* แทน YourTextColor ด้วยสีที่คุณต้องการ */
+
+::ng-deep .mat-snack-bar-container {
+  background-color: $custom-snackbar-background;
+  color: $custom-snackbar-text-color;
+}
