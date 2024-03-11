@@ -6,7 +6,7 @@ import { User } from '../../model/signup_post';
 import { Chart } from 'chart.js/auto';
 import { CommonModule, formatDate } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
-import { format } from 'mysql';
+// import { format } from 'mysql';
 @Component({
   selector: 'app-graph',
   standalone: true,
