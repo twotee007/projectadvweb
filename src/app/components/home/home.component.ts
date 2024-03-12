@@ -8,6 +8,8 @@ import { Getimgservice } from '../../services/api/Getimg.service';
 import { GetImg } from '../../model/Img';
 import { Router } from '@angular/router';
 import { User } from '../../model/signup_post';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogComponent } from './dialog.component';
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -17,7 +19,7 @@ import { User } from '../../model/signup_post';
 })
 export class HomeComponent {
 
-      constructor(private router: Router , private getimg : Getimgservice) {}
+      constructor(private router: Router , private getimg : Getimgservice,private dialog: MatDialog) {}
       allimg : GetImg[] = [];
       selectedImages: GetImg[] = [];
       votedImages: GetImg[] = [];
@@ -144,6 +146,8 @@ export class HomeComponent {
         console.log(this.imgwinner);
         console.log(this.imgloser);
 
+        this.openDialog(winner.score, winner.imgurl, winnerNewRating ,winner.name);
+
         const checkwinner = await this.getimg.InsertVote(winner.uid,winner.imgid,winnerNewRating,winner.isWinner);
         const checkloser  = await this.getimg.InsertVote(loser.uid,loser.imgid,loserNewRating,loser.isLoser);
         
@@ -153,6 +157,18 @@ export class HomeComponent {
           await this.getimg.Updateimg(winner.imgid,winner.score);
           await this.getimg.Updateimg(loser.imgid,loser.score);
         }
+      }
+      openDialog(winnerScore: number, winnerImageSrc: string, winnerrat: number , winnername : string): void {
+        const dialogRef = this.dialog.open(DialogComponent, {
+          width: '550px',
+          height : '550px', // ปรับเปลี่ยนขนาดตามความต้องการ
+          data: { winnerScore: winnerScore, winnerImageSrc: winnerImageSrc, Winnerrat: winnerrat, winnername : winnername }// ส่ง array ข้อมูลไปให้ Dialog
+        });
+      
+        dialogRef.afterClosed().subscribe(result => {
+          console.log('The dialog was closed');
+          // สามารถเพิ่มโค้ดที่ต้องการทำหลังจากปิด Dialog ได้
+        });
       }
       
 }

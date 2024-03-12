@@ -101,7 +101,7 @@ export class GraphComponent implements OnInit, AfterViewInit {
   }
   generateDateLabels(sevenDaysAgo: Date): string[] {
   const labels = [];
-  for (let i = 0; i < 7; i++) {
+  for (let i = 0; i < 6; i++) {
     const date = new Date(sevenDaysAgo);
     date.setDate(sevenDaysAgo.getDate() + i);
     labels.push(date.toISOString().split('T')[0]);
@@ -111,7 +111,7 @@ export class GraphComponent implements OnInit, AfterViewInit {
 generateDataArray(voteDateArray: string[], totalScoreArray: number[], sevenDaysAgo: Date): number[] {
   const data = [];
 
-  for (let i = 0; i < 7; i++) {
+  for (let i = 0; i < 6; i++) {
     const currentDate = new Date(sevenDaysAgo);
     currentDate.setDate(sevenDaysAgo.getDate() + i);
 
