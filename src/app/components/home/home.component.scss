@@ -64,3 +64,22 @@ body {
   footer p {
     margin: 5px 0; /* ปรับระยะห่างของย่อหน้าใน footer */
   }
+  @keyframes slideDown {
+    0% {
+      opacity: 0;
+      transform: translateY(-100%);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .d-flex {
+    animation: slideDown 0.5s ease-out;
+    margin-top: 30px; /* เพิ่ม margin-top เพื่อขยับลงมา */
+    h4{
+      padding: 13px;
+    }
+  }
+  
