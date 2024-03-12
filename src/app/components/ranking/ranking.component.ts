@@ -35,10 +35,25 @@ export class RankingComponent implements OnInit {
     }
     updaterank(todayrank: Getranktoday[], yesterdayrank: Getranktoday[]): void {
         for (let i = 0; i < todayrank.length; i++) {
-            const ranknow: Getranktoday = { ...todayrank[i] }; 
-            ranknow.rankdifferent = yesterdayrank[i].rankingyesterday - todayrank[i].rankingtoday;
-            ranknow.rankingyesterday = yesterdayrank[i].rankingyesterday;
-            this.rank.push(ranknow);
+            const todayItem = todayrank[i];
+            
+            // หา index ของ todayItem ใน yesterdayrank โดยใช้ชื่อ
+            const matchingIndex = yesterdayrank.findIndex(item => item.name === todayItem.name);
+        
+            // ถ้าเจอ item ที่ตรงกัน
+            if (matchingIndex !== -1) {
+                const yesterdayItem = yesterdayrank[matchingIndex];
+        
+                // สร้าง object เพื่อเก็บผลลัพธ์
+                const ranknow: Getranktoday = {
+                    ...todayItem,
+                    rankdifferent: yesterdayItem.rankingyesterday - todayItem.rankingtoday,
+                    rankingyesterday: yesterdayItem.rankingyesterday
+                };
+        
+                // เก็บผลลัพธ์ใน this.rank
+                this.rank.push(ranknow);
+            }
         }
         console.log(this.rank);
     }
