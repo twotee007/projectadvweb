@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
@@ -14,12 +14,17 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 </div>
   `,
 })
-export class DialogComponent {
+export class DialogComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<DialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { winnerScore: number , winnerImageSrc: string, Winnerrat : number ,winnername : string}
   ) {}
-
+  ngOnInit() {
+    // หลังจาก 3 วินาที ปิดป้อบอัพ
+    setTimeout(() => {
+      this.dialogRef.close();
+    }, 3000);
+  }
   onNoClick(): void {
     this.dialogRef.close();
   }
