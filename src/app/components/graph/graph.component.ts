@@ -66,10 +66,10 @@ export class GraphComponent implements OnInit, AfterViewInit {
       const voteDateArray = img.voteDate.split(',');
       const totalScoreArray = img.score.split(',').map(Number);
   
-      const labels = this.generateDateLabels(sevenDaysAgo);
-      // const data = totalScoreArray;
-      // const labels = voteDateArray;
-      const data = this.generateDataArray(voteDateArray, totalScoreArray, sevenDaysAgo);
+      // const labels = this.generateDateLabels(sevenDaysAgo);
+      const data = totalScoreArray;
+      const labels = voteDateArray;
+      // const data = this.generateDataArray(voteDateArray, totalScoreArray, sevenDaysAgo);
   
       new Chart(existingCanvas, {
         type: 'line',
@@ -99,30 +99,30 @@ export class GraphComponent implements OnInit, AfterViewInit {
       });
     }
   }
-  generateDateLabels(sevenDaysAgo: Date): string[] {
-  const labels = [];
-  for (let i = 0; i < 7; i++) {
-    const date = new Date(sevenDaysAgo);
-    date.setDate(sevenDaysAgo.getDate() + i);
-    labels.push(date.toISOString().split('T')[0]);
-  }
-  return labels;
-}
-generateDataArray(voteDateArray: string[], totalScoreArray: number[], sevenDaysAgo: Date): number[] {
-  const data = [];
+//   generateDateLabels(sevenDaysAgo: Date): string[] {
+//   const labels = [];
+//   for (let i = 0; i < 7; i++) {
+//     const date = new Date(sevenDaysAgo);
+//     date.setDate(sevenDaysAgo.getDate() + i);
+//     labels.push(date.toISOString().split('T')[0]);
+//   }
+//   return labels;
+// }
+// generateDataArray(voteDateArray: string[], totalScoreArray: number[], sevenDaysAgo: Date): number[] {
+//   const data = [];
 
-  for (let i = 0; i < 7; i++) {
-    const currentDate = new Date(sevenDaysAgo);
-    currentDate.setDate(sevenDaysAgo.getDate() + i);
+//   for (let i = 0; i < 7; i++) {
+//     const currentDate = new Date(sevenDaysAgo);
+//     currentDate.setDate(sevenDaysAgo.getDate() + i);
 
-    const index = voteDateArray.indexOf(currentDate.toISOString().split('T')[0]);
-    if (index !== -1) {
-      data.push(totalScoreArray[index]);
-    } else {
-      data.push(0);
-    }
-  }
+//     const index = voteDateArray.indexOf(currentDate.toISOString().split('T')[0]);
+//     if (index !== -1) {
+//       data.push(totalScoreArray[index]);
+//     } else {
+//       data.push(0);
+//     }
+//   }
 
-  return data;
-}
+//   return data;
+// }
 }
