@@ -21,10 +21,10 @@ export interface Getranktoday {
 }
 
 export interface VoteImg {
-    voteDate: string;
-    totalScore: string;
     imgid: number;
     name : string;
+    voteDate: string;
+    score: string;
     imgurl : string;
 }
 
