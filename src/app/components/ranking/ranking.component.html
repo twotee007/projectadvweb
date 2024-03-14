@@ -1,42 +1,44 @@
 <app-header></app-header>
 <div class="ranking-container">
     <h2 class="slide-up">Top 10 Ranking</h2>
-    <ul class="player-list">
-        <li class="player-item" *ngFor="let player of rank; let i = index" (mouseenter)="onSelectPlayer(player)" (mouseleave)="onMouseLeave()">
+    <ul class="player-list" *ngIf="User">
+        <li class="player-item" *ngFor="let player of rank; let i = index" (mouseenter)="onSelectPlayer(player)"
+            (mouseleave)="onMouseLeave()">
             <div class="player-details">
                 <span class="player-position">{{ i + 1 }}</span>
-                <!-- ใช้ *ngFor เพื่อวนลูปผ่าน playerRankings -->
                 <img [src]="player.imgurl" alt="{{ player.name }}" class="player-image">
                 <div class="player-info">
                     <span class="player-name">{{ player.name }}</span>
-                    <div class="all"  [ngClass]="{'up-arrow': player.rankingtoday < player.rankingyesterday, 'down-arrow': player.rankingtoday > player.rankingyesterday} ">
-                        <h6  *ngIf="player.rankingyesterday && player.rankingtoday !== player.rankingyesterday">
+                    <div class="all"
+                        [ngClass]="{'up-arrow': player.rankingtoday < player.rankingyesterday, 'down-arrow': player.rankingtoday > player.rankingyesterday}">
+                        <h6 *ngIf="player.rankingyesterday && player.rankingtoday !== player.rankingyesterday">
                             <ng-container *ngIf="player.rankingtoday < player.rankingyesterday" class="arrow-container">
-                                <img src="https://media.discordapp.net/attachments/1063306270003703878/1216061406294839346/down.png?ex=65ff0470&is=65ec8f70&hm=eef8f7377ebd28846539930edd2a3fb9b3dfdb8d293e9a79f9c13c55f9819037&=&format=webp&quality=lossless&width=160&height=160" alt="Up arrow" class="arrow-icon">  {{ player.rankdifferent }}
+                                <img src="https://media.discordapp.net/attachments/1063306270003703878/1216061406294839346/down.png?ex=65ff0470&is=65ec8f70&hm=eef8f7377ebd28846539930edd2a3fb9b3dfdb8d293e9a79f9c13c55f9819037&=&format=webp&quality=lossless&width=160&height=160"
+                                    alt="Up arrow" class="arrow-icon"> {{ player.rankdifferent }}
                             </ng-container>
-                            <ng-container *ngIf="player.rankingtoday > player.rankingyesterday";   class="arrow-container" >
-                                <img src="https://cdn-icons-png.flaticon.com/256/5548/5548156.png" alt="Down arrow" class="arrow-icon"> {{ -player.rankdifferent }}
+                            <ng-container *ngIf="player.rankingtoday > player.rankingyesterday" class="arrow-container">
+                                <img src="https://cdn-icons-png.flaticon.com/256/5548/5548156.png" alt="Down arrow"
+                                    class="arrow-icon"> {{ -player.rankdifferent }}
                             </ng-container>
-                           
                         </h6>
                     </div>
                     <span class="player-rating">Elo Rating: {{ player.score }}</span>
                 </div>
-                
             </div>
-           
         </li>
-        
     </ul>
     <div class="popup-container" *ngIf="selectedPlayer">
         <div class="popup-content">
             <img [src]="selectedPlayer.imgurl" alt="{{ selectedPlayer.name }}" class="popup-image">
             <div class="popup-details">
                 <span class="popup-name">{{ selectedPlayer.name }}</span>
-                <span class="popup-position">Position: {{ selectedPlayer.name }}</span>
+                <span class="popup-position">Position: {{ selectedPlayer.position }}</span>
                 <span class="popup-rating">Elo Rating: {{ selectedPlayer.score }}</span>
             </div>
         </div>
     </div>
 </div>
-
+<div *ngIf="!User" class="centered-content">
+    <h1 class="slide-up-text" style="font-size: 20px;">User has not logged in yet. Please login first to view the ranking page.</h1>
+    <button routerLink="/login" class="slide-up-button">Go to Login</button>
+</div>

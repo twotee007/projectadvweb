@@ -4,12 +4,14 @@ import { HeaderComponent } from '../header/header.component';
 import { NgFor } from '@angular/common';
 import { Getranktoday } from '../../model/Img';
 import { CommonModule } from '@angular/common';
+import { User } from '../../model/signup_post';
+import { RouterModule } from '@angular/router';
 
 @Component({
     selector: 'app-ranking',
     standalone: true,
    
-  imports: [HeaderComponent,NgFor,CommonModule],
+  imports: [HeaderComponent,NgFor,CommonModule,RouterModule],
     templateUrl: './ranking.component.html',
     styleUrls: ['./ranking.component.scss']
 })
@@ -19,11 +21,12 @@ export class RankingComponent implements OnInit {
     yesterdayrank : Getranktoday[] =[];
     rank : Getranktoday[] = [];
     selectedPlayer: any;
+    User : User[] = [];
     constructor(private getimgservice: Getimgservice) {}
 
     ngOnInit(): void {
         this.loadPlayerRankings(); // เรียกเมธอดเมื่อคอมโพเนนต์ถูกโหลด
-       
+        this.User = JSON.parse(localStorage.getItem('user')!);
     }
 
     async loadPlayerRankings() {
@@ -32,6 +35,7 @@ export class RankingComponent implements OnInit {
         console.log('Today',this.todayrank);
         console.log("Yesterday",this.yesterdayrank);
         this.updaterank(this.todayrank,this.yesterdayrank);
+        
     }
     updaterank(todayrank: Getranktoday[], yesterdayrank: Getranktoday[]): void {
         for (let i = 0; i < todayrank.length; i++) {
@@ -41,11 +45,14 @@ export class RankingComponent implements OnInit {
                     ranknow.rankdifferent = yesterdayrank[j].rankingyesterday - todayrank[i].rankingtoday;
                     ranknow.rankingyesterday = yesterdayrank[j].rankingyesterday
                     this.rank.push(ranknow);
+                    
                 }
             }
             }
             console.log(this.rank);
+            
         }
+        
     onSelectPlayer(player: any) {
         this.selectedPlayer = player;
       }
