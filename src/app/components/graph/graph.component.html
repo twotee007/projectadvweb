@@ -16,8 +16,8 @@
 </div>
 
 <div *ngIf="!isLoading && (User && getimg.length === 0)" class="centered-content">
-  <h1 class="slide-up-text" style="font-size: 20px;">มึงไปอัพรูปก่อนนะไอสัส</h1>
-   <button routerLink="/login" class="slide-up-button">Go to อัพรูปไอควย</button>
+  <h1 class="slide-up-text" style="font-size: 20px;">The user does not have any photos yet. Please add images before voting graph data is available. Go to your profile page to add a photo.</h1>
+   <button routerLink="/profile" class="slide-up-button">Go to Profile </button>
 </div>
 
 <div *ngIf="!isLoading && (!User || User.length === 0)" class="centered-content">
