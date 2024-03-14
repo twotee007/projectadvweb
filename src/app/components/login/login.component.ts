@@ -8,10 +8,11 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Getimgservice } from '../../services/api/Getimg.service';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [MatInputModule,MatIconModule,MatFormFieldModule,CommonModule],
+  imports: [MatInputModule,MatIconModule,MatFormFieldModule,CommonModule,MatProgressSpinnerModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
@@ -21,6 +22,7 @@ export class LoginComponent{
       singup : SignupData[] = [];
       image: File | undefined;
       imageUrl : string | undefined;
+      isLoading: boolean = true; 
       async loginuser(username: string, password: string) {
         if (username.trim() === '' || password.trim() === '') {
           this.snackBar.open('Username or password is not provided.', 'Close', {
@@ -43,6 +45,7 @@ export class LoginComponent{
       }
       
       async signup(name: string, username: string, password: string, comfirmpassword: string) {
+        this.isLoading = false;
         if(password != comfirmpassword){
             this.snackBar.open('กรุณากรอก password กับ comfirmpassword ให้ถูกต้อง', 'Close', {
                 verticalPosition: 'top',
@@ -64,7 +67,8 @@ export class LoginComponent{
                 const file: File = this.image;
                 console.log('File uploaded successfully',file);
                 this.singup = await this.catmashService.SignupUser(name, username, password, type,file);
-                this.loginuser(username,password);
+                  this.loginuser(username,password);
+                
             }
             // ลงทะเบียนผู้ใช้หลังจากที่อัปโหลดไฟล์เสร็จสิ้น;
         } catch (error) {

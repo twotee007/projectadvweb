@@ -37,7 +37,9 @@
                                     <input class="flip-card__input font" name="password" placeholder="password" type="password" #passwordInputt >
                                     <input class="flip-card__input font" name="comfirmpassword" placeholder="Confirm password" type="password" #comfirmpasswordInput (keydown.enter)="signup(nameInput.value, usernameInputt.value, passwordInputt.value, comfirmpasswordInput.value)">
                                     <button class="flip-card__btn font" (click)="signup(nameInput.value, usernameInputt.value, passwordInputt.value, comfirmpasswordInput.value)">Confirm!</button>
-                                    
+                                    <div *ngIf="!isLoading">
+                                        <mat-spinner></mat-spinner>
+                                    </div>
                                 </div>
                             </div>
                         </div>
