@@ -282,3 +282,23 @@ $custom-snackbar-text-color:rgb(51, 56, 153); /* แทน YourTextColor ด้�
   background-color: $custom-snackbar-background;
   color: $custom-snackbar-text-color;
 }
+.loading-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999; /* ให้ spinner อยู่ด้านหน้าสุด */
+  background-color: rgba(255, 255, 255, 0.5); /* สีพื้นหลังสำหรับเบลอ */
+  backdrop-filter: blur(10px); /* เอฟเฟกต์เบลอ */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  /* ตั้งค่าสไปนเนอร์ตามที่ต้องการ */
+}
