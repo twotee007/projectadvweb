@@ -19,7 +19,7 @@ export class GraphComponent implements OnInit, AfterViewInit {
 
   getimg: VoteImg[] = [];
   isLoading: boolean = true;
-
+  User : User[] = [];
   constructor(private getimgservice: Getimgservice ,private router: Router) {}
 
   ngOnInit(): void {
@@ -28,9 +28,9 @@ export class GraphComponent implements OnInit, AfterViewInit {
 
   async loadData(): Promise<void> {
     try {
-      const user = JSON.parse(localStorage.getItem('user')!);
-      if (user) {
-        this.getimg = await this.getimgservice.GetGraph(user[0].uid);
+      this.User = JSON.parse(localStorage.getItem('user')!);
+      if (this.User) {
+        this.getimg = await this.getimgservice.GetGraph(this.User[0].uid);
         console.log('getimg:', this.getimg);
         this.ngAfterViewInit();
       }
