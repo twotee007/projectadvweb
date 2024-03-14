@@ -21,21 +21,21 @@ export class CatmashService {
         return response as User[];
       }
 
-      public async SignupUser(name: string, username: string, password: string, type: string) {
+      public async SignupUser(name: string, username: string, password: string, type: string, file: File) {
         const url = this.constants.API_ENDPOINT + '/login/signup';
-        const body = {
-          username: username,
-          name: name,
-          password: password,
-          type: type
-        };
-        const headers = new HttpHeaders().set('Content-Type', 'application/json');
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('username', username);
+        formData.append('name', name);
+        formData.append('password', password);
+        formData.append('type', type);
+    
         try {
-          const response = await this.http.post(url, body, { headers: headers }).toPromise();
-          console.log(response);
-          return response as SignupData[];
+            const response = await this.http.post(url, formData).toPromise();
+            console.log(response);
+            return response as SignupData[];
         } catch (error) {
-          throw error;
+            throw error;
         }
-      }
+    }
 }

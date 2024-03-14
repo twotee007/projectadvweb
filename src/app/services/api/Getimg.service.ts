@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Constants } from '../../config/constans';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { lastValueFrom } from 'rxjs';
+import { Observable, lastValueFrom } from 'rxjs';
 import { GetImg, Getranktoday, VoteImg } from '../../model/Img';
 @Injectable({
   providedIn: 'root'
