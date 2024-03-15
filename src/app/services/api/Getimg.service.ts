@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Constants } from '../../config/constans';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, lastValueFrom } from 'rxjs';
-import { GetImg, Getranktoday, VoteImg } from '../../model/Img';
+import { GetImg, Getranktoday, ImgUser, VoteImg } from '../../model/Img';
 @Injectable({
   providedIn: 'root'
 })
@@ -55,9 +55,31 @@ export class Getimgservice {
         const response = await lastValueFrom(this.http.get(url));
         return response as Getranktoday[];
       }
+
       public async GetGraph(uid: number) {
         const url = this.constants.API_ENDPOINT + "/rank/graph/" + uid;
         const response = await lastValueFrom(this.http.get(url));
         return response as VoteImg[];
       }
+
+      public async GetimgUser(uid: number) {
+        const url = this.constants.API_ENDPOINT + "/profile/" + uid;
+        const response = await lastValueFrom(this.http.get(url));
+        return response as ImgUser[];
+      }
+
+      public async insertimg(name: string, uid: number, file: File) {
+        const url = this.constants.API_ENDPOINT + '/profile/addimg';
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('name', name);
+        formData.append('uid', uid.toString()); // Convert uid to string
+  
+        try {
+            const response = await this.http.post(url, formData).toPromise();
+            console.log(response);
+        } catch (error) {
+            throw error;
+        }
+    }
 }

@@ -1,9 +1,9 @@
 <app-header></app-header>
 <div class="container text-center" style="margin-top: 110px;">
-    <div class="d-flex flex-column align-items-center">
-        <img src="https://www.cnet.com/a/img/resize/e0ebf3dc974fce8609d2ba49fa36cf0f93190062/hub/2021/11/29/f566750f-79b6-4be9-9c32-8402f58ba0ef/richerd.png?auto=webp&fit=crop&height=1200&width=1200" alt="" class="imgsize rounded-circle">
-        <h1 class="fontfacemash" style="margin-top: 20px; color: rgb(51, 56, 153);;">YOUNG BOY NEVER BROKE AGAIN</h1>
-        <h4 style="color: rgb(51, 56, 153);">I'll be number 1 in facemash!</h4>
+    <div class="d-flex flex-column align-items-center" *ngIf="User">
+        <img src="{{User[0].image}}" alt="" class="imgsize rounded-circle">
+        <h1 class="fontfacemash" style="margin-top: 20px; color: rgb(51, 56, 153);;">{{User[0].name}}</h1>
+        <h4 style="color: rgb(51, 56, 153);">{{User[0].note}}</h4>
         <div class="row mb-3">
             <div class="col">
                 <button class="bpro" data-bs-target="#editprofile" data-bs-toggle="modal">Edit profile</button>
@@ -16,80 +16,27 @@
             </div>
         </div>
         <mat-progress-bar mode="buffer"></mat-progress-bar>
-        <div class="row">
-            <div class="col-md-3 mt-3">
+        <div class="row mt-3" *ngIf="imgUser.length > 0">
+                 <div class="col-md-3 mt-3" *ngFor="let img of imgUser">
                 <div class="card" style="background-color:  rgb(51, 56, 153); ">
-                    <img src="https://i.pinimg.com/originals/ba/92/7f/ba927ff34cd961ce2c184d47e8ead9f6.jpg" alt="" class="card-img-top img-fluid rounded">
-                    <div class="card-body">
-                        <div>
-                            <h3 class="fontfacemash" style="color: rgb(255, 255, 255);">Cat mew</h3>
-                            <h6 class="fontfacemash" style="color: rgb(255, 255, 255);">Today Rank: <span class="text-danger">1</span></h6>
-                            <h6 class="fontfacemash" style="color: rgb(255, 255, 255);">Last day Rank: <span class="text-danger">3</span></h6>
-                            <button class="bcha" style="margin-bottom: 5px;">Change photo</button>
-                            <button class="bdele">Delete photo</button>
-                        </div>
+                    <img src="{{img.imgurl}}" alt="" class="card-img-top img-fluid rounded">
+                    <div class="card-body text-left" style="color: rgb(255, 255, 255);">
+                        <h3 class="fontfacemash">{{img.name}}</h3>
+                        <h6 class="fontfacemash">Elo ranting : <span class="text-danger">{{img.score}}</span></h6>
+                        <!-- <h6 class="fontfacemash">Today Rank: <span class="text-danger">1</span></h6> -->
+                        <!-- <h6 class="fontfacemash">Last day Rank: <span class="text-danger">3</span></h6> -->
+                        <button class="bcha" style="margin-bottom: 5px;">Change photo</button>
+                        <button class="bdele">Delete photo</button>
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 mt-3">
-                <div class="card" style="background-color:  rgb(51, 56, 153);">
-                    <img src="https://www.the-sun.com/wp-content/uploads/sites/6/2023/10/www-instagram-com-monkeycatluna-hl-851711797.jpg" alt="" class="card-img-top img-fluid rounded">
-                    <div class="card-body">
-                        <div>
-                            <h3 class="fontfacemash" style="color: rgb(255, 255, 255);">Cat mew</h3>
-                            <h6 class="fontfacemash" style="color: rgb(255, 255, 255);">Today Rank: <span class="text-danger">1</span></h6>
-                            <h6 class="fontfacemash" style="color: rgb(255, 255, 255);">Last day Rank: <span class="text-danger">3</span></h6>
-                            <button class="bcha" style="margin-bottom: 5px;">Change photo</button>
-                            <button class="bdele">Delete photo</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 mt-3">
-                <div class="card" style="background-color:  rgb(51, 56, 153);">
-                    <img src="https://i.pinimg.com/736x/b9/c4/7e/b9c47ef70bff06613d397abfce02c6e7.jpg" alt="" class="card-img-top img-fluid rounded">
-                    <div class="card-body">
-                        <div>
-                            <h3 class="fontfacemash" style="color: rgb(255, 255, 255);">Cat mew</h3>
-                            <h6 class="fontfacemash" style="color: rgb(255, 255, 255);">Today Rank: <span class="text-danger">1</span></h6>
-                            <h6 class="fontfacemash" style="color: rgb(255, 255, 255);">Last day Rank: <span class="text-danger">3</span></h6>
-                            <button class="bcha" style="margin-right: 5px;">Change photo</button>
-                            <button class="bdele">Delete photo</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 mt-3">
-                <div class="card" style="background-color:  rgb(51, 56, 153);">
-                    <img src="https://i.pinimg.com/originals/ba/92/7f/ba927ff34cd961ce2c184d47e8ead9f6.jpg" alt="" class="card-img-top img-fluid rounded">
-                    <div class="card-body">
-                        <div>
-                            <h3 class="fontfacemash" style="color: rgb(255, 255, 255);">Cat mew</h3>
-                            <h6 class="fontfacemash" style="color: rgb(255, 255, 255);">Today Rank: <span class="text-danger">1</span></h6>
-                            <h6 class="fontfacemash" style="color: rgb(255, 255, 255);">Last day Rank: <span class="text-danger">3</span></h6>
-                            <button class="bcha" style="margin-bottom: 5px;">Change photo</button>
-                            <button class="bdele">Delete photo</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 mt-3">
-                <div class="card" style="background-color:  rgb(51, 56, 153);">
-                    <img src="https://i.pinimg.com/originals/ba/92/7f/ba927ff34cd961ce2c184d47e8ead9f6.jpg" alt="" class="card-img-top img-fluid rounded">
-                    <div class="card-body">
-                        <div>
-                            <h3 class="fontfacemash" style="color: rgb(255, 255, 255);">Cat mew</h3>    
-                            <h6 class="fontfacemash" style="color: rgb(255, 255, 255);">Today Rank: <span class="text-danger">1</span></h6>
-                            <h6 class="fontfacemash" style="color: rgb(255, 255, 255);">Last day Rank: <span class="text-danger">3</span></h6>
-                            <button class="bcha" style="margin-right: 5px;">Change photo</button>
-                            <button class="bdele">Delete photo</button>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
+        <div *ngIf="!User">
+            <h1>Go to login</h1>
+        </div>
     </div>
-</div>
+
 
 
 <div class="modal fade" id="editprofile" aria-hidden="true" aria-labelledby="editprofilelabel" tabindex="-1">
@@ -122,6 +69,9 @@
     </div>
 </div>
 
+<div class="loading-container" *ngIf="!isLoading">
+    <mat-spinner class="spinner"></mat-spinner>
+</div>
 
 <div class="modal fade" id="editpassword" aria-hidden="true" aria-labelledby="editpasswordlabel" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
@@ -131,7 +81,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body text-center">
-                <img src="https://www.cnet.com/a/img/resize/e0ebf3dc974fce8609d2ba49fa36cf0f93190062/hub/2021/11/29/f566750f-79b6-4be9-9c32-8402f58ba0ef/richerd.png?auto=webp&fit=crop&height=1200&width=1200" alt="" class="imgpsize rounded-circle">
+                <img src="{{User[0].image}}" alt="" class="imgpsize rounded-circle">
                 <div class="mb-3">
                     <h1 class="col-form-label fontfacemash" style="color: rgb(51, 56, 153);">Old password :</h1>
                     <input type="text" class="form-control" id=">oldpassword">
@@ -163,15 +113,17 @@
                 <div class="bfile fontthai" style="margin-left: 5px; cursor: pointer;">
                     <div class="bfile-container">+ Add photo</div>
                 </div>
-                <input type="file" id="imageuploadInput" style="display: none;" (change)="onuploadImageSelected($event)">
+                <input type="file" id="imageuploadInput" style="display: none;" (change)="onFileSelected($event)">
                 </label>
                 </div>
-                <img [src]="imageuploadUrl" alt="" class="imgaddphosize img-fluid mx-auto">
+                <div *ngIf="imageUrl">
+                    <img [src]="imageUrl" alt="" class="imgaddphosize img-fluid mx-auto">
+                </div>
                 <div class="mb-3">
                     <h1 class="col-form-label fontfacemash" style="color: rgb(51, 56, 153);">Name Photo :</h1>
-                    <input type="text" class="form-control" id="addphotoname">
+                    <input type="text" class="form-control" id="addphotoname" #nameimginput>
                 </div>
-                <button class="bpro fontthai"> Send </button>
+                <button class="bpro fontthai" (click)="addimg(nameimginput.value,User[0].uid)"> Send </button>
             </div>
         </div>
     </div>

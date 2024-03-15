@@ -28,3 +28,11 @@ export interface VoteImg {
     imgurl : string;
 }
 
+export interface ImgUser {
+    imgid: number;
+    name : string;
+    voteDate: string;
+    score: string;
+    imgurl : string;
+}
+
