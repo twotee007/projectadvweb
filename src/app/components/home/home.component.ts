@@ -10,10 +10,11 @@ import { Router } from '@angular/router';
 import { User } from '../../model/signup_post';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from './dialog.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule,HttpClientModule,FormsModule,MatCardModule,HeaderComponent],
+  imports: [CommonModule,HttpClientModule,FormsModule,MatCardModule,HeaderComponent,MatProgressSpinnerModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
@@ -30,6 +31,7 @@ export class HomeComponent {
       votedImagesCount: number = 0;
       countdownSeconds: number = 0;
       show : boolean = true;
+      isLoading: boolean = true; 
       User : User[] = [];
       ngOnInit():void {
         this.loadImg();
@@ -48,7 +50,7 @@ export class HomeComponent {
 
       loadNextImages() {
         const remainingImages = this.allimg.filter(img => !this.votedImagesIds.has(img.imgid));
-      
+        this.isLoading = true;
         if (remainingImages.length >= 2) {
           this.selectedImages = this.shuffleImages(remainingImages.slice(0, 2));
         } else {
@@ -106,9 +108,12 @@ export class HomeComponent {
             }
           }, 1000); // นับถอยหลังทุก 1000 มิลลิวินาที (1 วินาที)
           return;
-        } else {
-          this.loadNextImages();
-        }
+        }else {
+          this.isLoading = false;
+          setTimeout(() => {
+              this.loadNextImages();
+          }, 4000); // 3000 milliseconds = 3 seconds
+      }
 
       }
       calculateKFactor(rating: number) {
@@ -147,16 +152,18 @@ export class HomeComponent {
         console.log(this.imgloser);
 
         this.openDialog(winner.score, winner.imgurl, winnerNewRating ,winner.name);
-
-        const checkwinner = await this.getimg.InsertVote(winner.uid,winner.imgid,winnerNewRating,winner.isWinner);
-        const checkloser  = await this.getimg.InsertVote(loser.uid,loser.imgid,loserNewRating,loser.isLoser);
-        
-        winner.score = winnerNewRating + winner.score;
-        loser.score = loserNewRating + loser.score;
-        if(checkwinner === true && checkloser === true){
-          await this.getimg.Updateimg(winner.imgid,winner.score);
-          await this.getimg.Updateimg(loser.imgid,loser.score);
+        const checkwinner = await this.getimg.InsertVote(winner.uid, winner.imgid, winnerNewRating, winner.isWinner);
+        if (checkwinner === true) {
+            winner.score = winnerNewRating + winner.score;
+            await this.getimg.Updateimg(winner.imgid, winner.score);
         }
+        
+        const checkloser = await this.getimg.InsertVote(loser.uid, loser.imgid, loserNewRating, loser.isLoser);
+        if (checkloser === true) {
+            loser.score = loserNewRating + loser.score;
+            await this.getimg.Updateimg(loser.imgid, loser.score);
+        }
+        
       }
       openDialog(winnerScore: number, winnerImageSrc: string, winnerrat: number , winnername : string): void {
         const dialogRef = this.dialog.open(DialogComponent, {
