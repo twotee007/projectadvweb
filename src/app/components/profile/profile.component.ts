@@ -9,12 +9,12 @@ import { ImgUser } from '../../model/Img';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CommonModule } from '@angular/common';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [MatIconModule,FormsModule,HeaderComponent,MatProgressBarModule,CommonModule,MatProgressSpinnerModule],
+  imports: [MatIconModule,FormsModule,HeaderComponent,MatProgressBarModule,CommonModule,MatProgressSpinnerModule,RouterModule],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'
 })
@@ -26,11 +26,17 @@ export class ProfileComponent implements OnInit {
   imageUrl : string | undefined;
   isLoading: boolean = true; 
   constructor(private getimgservice: Getimgservice,private snackBar: MatSnackBar, private router: Router) {}
-    ngOnInit(): void {
-      this.User = JSON.parse(localStorage.getItem('user')!);
-      this.getimgUser(this.User[0].uid)
-      
+  ngOnInit(): void {
+    const userJson = localStorage.getItem('user');
+    if (userJson) {
+        this.User = JSON.parse(userJson);
+        if (this.User && this.User.length > 0) {
+            // เรียกใช้งานคุณสมบัติของอ็อบเจกต์ User ที่ไม่ใช่ null
+            // ตรวจสอบค่าก่อนที่จะใช้งานคุณสมบัติ
+            this.getimgUser(this.User[0].uid);
+        }
     }
+}
     async getimgUser(Userid : any){
       this.imgUser = await this.getimgservice.GetimgUser(Userid);
       console.log(this.imgUser);

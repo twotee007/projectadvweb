@@ -1,7 +1,8 @@
 <app-header></app-header>
 <div class="container text-center" style="margin-top: 110px;">
-    <div class="d-flex flex-column align-items-center" *ngIf="User">
-        <img src="{{User[0].image}}" alt="" class="imgsize rounded-circle">
+    <h2 class="slide-up">Profile</h2>
+    <div *ngIf="User && User.length > 0" class="d-flex flex-column align-items-center">
+        <img [src]="User && User[0] ? User[0].image : ''" alt="imageprofile" class="imgsize rounded-circle">
         <h1 class="fontfacemash" style="margin-top: 20px; color: rgb(51, 56, 153);;">{{User[0].name}}</h1>
         <h4 style="color: rgb(51, 56, 153);">{{User[0].note}}</h4>
         <div class="row mb-3">
@@ -17,26 +18,24 @@
         </div>
         <mat-progress-bar mode="buffer"></mat-progress-bar>
         <div class="row mt-3" *ngIf="imgUser.length > 0">
-                 <div class="col-md-3 mt-3" *ngFor="let img of imgUser">
+            <div class="col-md-3 mt-3" *ngFor="let img of imgUser">
                 <div class="card" style="background-color:  rgb(51, 56, 153); ">
                     <img src="{{img.imgurl}}" alt="" class="card-img-top img-fluid rounded">
                     <div class="card-body text-left" style="color: rgb(255, 255, 255);">
                         <h3 class="fontfacemash">{{img.name}}</h3>
                         <h6 class="fontfacemash">Elo ranting : <span class="text-danger">{{img.score}}</span></h6>
-                        <!-- <h6 class="fontfacemash">Today Rank: <span class="text-danger">1</span></h6> -->
-                        <!-- <h6 class="fontfacemash">Last day Rank: <span class="text-danger">3</span></h6> -->
                         <button class="bcha" style="margin-bottom: 5px;">Change photo</button>
                         <button class="bdele">Delete photo</button>
                     </div>
                 </div>
             </div>
-            </div>
-        </div>
-        <div *ngIf="!User">
-            <h1>Go to login</h1>
         </div>
     </div>
-
+    <div *ngIf="!User || User.length === 0" class="centered-content" >
+            <h1  class="slide-up-text" style="font-size: 20px;">The user has not logged in yet. Please log in to access your profile page.</h1>
+            <button routerLink="/login">Go to login</button>
+    </div>
+</div>
 
 
 <div class="modal fade" id="editprofile" aria-hidden="true" aria-labelledby="editprofilelabel" tabindex="-1">
@@ -80,7 +79,7 @@
                 <h1 class="modal-title fs-5 fontfacemash" id="editpasswordlabel" style="color: rgb(51, 56, 153);">Edit password</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body text-center">
+            <div class="modal-body text-center" *ngIf="User && User.length > 0">
                 <img src="{{User[0].image}}" alt="" class="imgpsize rounded-circle">
                 <div class="mb-3">
                     <h1 class="col-form-label fontfacemash" style="color: rgb(51, 56, 153);">Old password :</h1>
