@@ -7,10 +7,13 @@
         <div *ngIf="show && selectedImages && selectedImages.length >= 2" >
         <mat-card>
           <mat-card-header>
-            <h3>{{selectedImages[0].name}}</h3>
+            <h3 *ngIf="isLoading">{{selectedImages[0].name}}</h3>
           </mat-card-header>
           <mat-card-content>
-                <div class="image-container" (click)="onImageClick(0)">
+            <div class="image-container" *ngIf="!isLoading">
+              <mat-spinner class="spinner"></mat-spinner>
+          </div>
+                <div class="image-container" (click)="onImageClick(0)" *ngIf="isLoading">
                   <img [src]="selectedImages[0].imgurl" alt="Image 1">
                 </div>
           </mat-card-content>
@@ -26,17 +29,19 @@
         <div *ngIf="show && selectedImages && selectedImages.length >= 2">
         <mat-card>
           <mat-card-header>
-            <h3>{{selectedImages[1].name}}</h3>
+            <h3 *ngIf="isLoading">{{selectedImages[1].name}}</h3>
           </mat-card-header>
           <mat-card-content>
-              <div class="image-container" (click)="onImageClick(1)">
+            <div class="image-container" *ngIf="!isLoading">
+              <mat-spinner class="spinner"></mat-spinner>
+          </div>
+              <div class="image-container" (click)="onImageClick(1)" *ngIf="isLoading">
                 <img [src]="selectedImages[1].imgurl" alt="Image 2">
               </div>
           </mat-card-content>
         </mat-card>
             </div>
         </div>
-       
   </body>
   <footer>
     <p>Copyright © 2024 All Rights Reserved.</p>
