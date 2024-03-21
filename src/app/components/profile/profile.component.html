@@ -26,8 +26,36 @@
                         <h6 class="fontfacemash">Elo ranting : <span class="text">{{img.score}}</span></h6>
                         <h6 class="fontfacemash">Today Ranking : <span class="text">{{img.rankingtoday}}</span></h6>
                         <h6 class="fontfacemash">Yesterday Ranking : <span class="text">{{img.rankingyesterday}}</span></h6>
-                        <button class="bcha" style="margin-bottom: 5px;">Change photo</button>
+                        <button class="bcha" style="margin-bottom: 5px;" [attr.data-bs-target]="'#addphoto' + img.imgid" data-bs-toggle="modal">Change photo</button>
                         <button class="bdele">Delete photo</button>
+                    </div>
+                </div>
+                <div class="modal fade" id="addphoto{{img.imgid}}" aria-hidden="true" aria-labelledby="addphotolabel" tabindex="-1">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5 fontfacemash" id="addphotolabel" style="color: rgb(51, 56, 153);">+ Photo</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body text-center">
+                                <div class="mb-3">
+                                <label for="imageuploadInput" class="pointer">
+                                <div class="bfile fontthai" style="margin-left: 5px; cursor: pointer;">
+                                    <div class="bfile-container">Change Photo</div>
+                                </div>
+                                <input type="file" id="imageuploadInput" style="display: none;" (change)="onFileSelected($event)">
+                                </label>
+                                </div>
+                                    <img *ngIf="imageUrluser" [src]="imageUrluser" alt="" class="imgaddphosize img-fluid mx-auto">
+                                    <img *ngIf="imgcheak" src="{{img.imgurl}}" alt="" class="imgaddphosize img-fluid mx-auto">
+                                <div class="mb-3">
+                                    <h1 class="col-form-label fontfacemash" style="color: rgb(51, 56, 153);">Photo Name :</h1>
+                                    <input type="text" class="form-control" id="addphotoname" #nameimginput>
+                                    <small *ngIf="!cheackname" class="text-danger">Please input photo name</small>
+                                </div>
+                                <button class="bpro fontthai" (click)="addimg(nameimginput.value,User[0].uid)"> Send </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
