@@ -20,6 +20,7 @@ export class RankingComponent implements OnInit {
     todayrank : Getranktoday[] =[];
     yesterdayrank : Getranktoday[] =[];
     rank : Getranktoday[] = [];
+    rankold : Getranktoday[] = [];
     selectedPlayer: any;
     User : User[] = [];
     constructor(private getimgservice: Getimgservice) {}
@@ -44,13 +45,12 @@ export class RankingComponent implements OnInit {
                 if(todayrank[i].name == yesterdayrank[j].name){
                     ranknow.rankdifferent = yesterdayrank[j].rankingyesterday - todayrank[i].rankingtoday;
                     ranknow.rankingyesterday = yesterdayrank[j].rankingyesterday
-                    this.rank.push(ranknow);
-                    
+                    this.rankold.push(ranknow);
                 }
             }
             }
+            this.rank = this.rankold.slice(0,10);
             console.log(this.rank);
-            
         }
         
     onSelectPlayer(player: any) {

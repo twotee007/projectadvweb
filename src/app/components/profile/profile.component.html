@@ -23,7 +23,9 @@
                     <img src="{{img.imgurl}}" alt="" class="card-img-top img-fluid rounded">
                     <div class="card-body text-left" style="color: rgb(255, 255, 255);">
                         <h3 class="fontfacemash">{{img.name}}</h3>
-                        <h6 class="fontfacemash">Elo ranting : <span class="text-danger">{{img.score}}</span></h6>
+                        <h6 class="fontfacemash">Elo ranting : <span class="text">{{img.score}}</span></h6>
+                        <h6 class="fontfacemash">Today Ranking : <span class="text">{{img.rankingtoday}}</span></h6>
+                        <h6 class="fontfacemash">Yesterday Ranking : <span class="text">{{img.rankingyesterday}}</span></h6>
                         <button class="bcha" style="margin-bottom: 5px;">Change photo</button>
                         <button class="bdele">Delete photo</button>
                     </div>
@@ -46,23 +48,24 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body text-center">
-                <img [src]="imageUrl" alt="" class="imgpsize rounded-circle mx-auto">
+                <img *ngIf="imageUrluser" [src]="imageUrluser" alt="" class="imgpsize rounded-circle mx-auto">
+                <img *ngIf="imgcheak" src="{{User[0].image}}" alt="" class="imgpsize rounded-circle mx-auto">
                 <label for="imageInput" class="pointer">
                 <div class="bfile fontthai" style="margin-left: 5px; cursor: pointer;">
                     <div class="bfile-container">Change img</div>
                 </div>
-                <input type="file" id="imageInput" style="display: none;" (change)="onImageSelected($event)">
+                <input type="file" id="imageInput" style="display: none;" (change)="onFileSelectedimguser($event)">
                 </label>
                 <div class="mb-3">
                     <h1 class="col-form-label fontfacemash" style="color: rgb(51, 56, 153);">Name :</h1>
-                    <input type="text" class="form-control" id="editname">
+                    <input type="text" class="form-control" id="editname" [(ngModel)]="editName">
                 </div>
                 <div class="mb-3">
                     <h1 class="col-form-label fontfacemash" style="color: rgb(51, 56, 153);">Self description :</h1>
-                    <textarea class="form-control" maxlength="100" id="editdescription"></textarea>
+                    <textarea class="form-control" maxlength="100" id="editdescription" #noteinput>{{this.User[0].note}}</textarea>
                     <small id="word-count" class="form-text text-muted" style="color: rgb(51, 56, 153);">Print no more than 100 characters.</small>
                 </div>
-                <button class="bpro fontthai">Send</button>
+                <button class="bpro fontthai" (click)="updateuser(noteinput.value)">Send</button>
             </div>
         </div>
     </div>
@@ -79,21 +82,28 @@
                 <h1 class="modal-title fs-5 fontfacemash" id="editpasswordlabel" style="color: rgb(51, 56, 153);">Edit password</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body text-center" *ngIf="User && User.length > 0">
+            <div class="modal-body text-center" *ngIf="User && User.length > 0 && !success">
                 <img src="{{User[0].image}}" alt="" class="imgpsize rounded-circle">
                 <div class="mb-3">
                     <h1 class="col-form-label fontfacemash" style="color: rgb(51, 56, 153);">Old password :</h1>
-                    <input type="text" class="form-control" id=">oldpassword">
+                    <input type="text" class="form-control" id=">oldpassword" #oldpassinput>
+                    <small *ngIf="!cheackpass" class="text-danger">The old code is invalid.</small>
                 </div>
                 <div class="mb-3">
                     <h1 class="col-form-label fontfacemash" style="color: rgb(51, 56, 153);">New Password :</h1>
-                    <input type="password" class="form-control" id="newpassword">
+                    <input type="password" class="form-control" id="newpassword" #newpassinput>
                 </div>
                 <div class="mb-3">
                     <h1 class="col-form-label fontfacemash" style="color: rgb(51, 56, 153);">Confirm password :</h1>
-                    <input type="password" class="form-control" id="confirmnewpassword">
+                    <input type="password" class="form-control" id="confirmnewpassword" #confirmnewpassinput>
+                    <small *ngIf="!cheacknewpass" class="text-danger">Please input newpassword and confirmpassword as well.</small>
                 </div>
-                <button class="bpro fontthai"> Send </button>
+                <button class="bpro fontthai" (click)="changepass(oldpassinput.value,newpassinput.value,confirmnewpassinput.value,User[0].uid)"> Send </button>
+            </div>
+            <div *ngIf="success">
+                <div class="modal-body text-center">
+                    <h1 class="col-form-label fontfacemash" style="color: rgb(51, 56, 153);">Password changed successfully!</h1>
+                </div>
             </div>
         </div>
     </div>
@@ -106,7 +116,7 @@
                 <h1 class="modal-title fs-5 fontfacemash" id="addphotolabel" style="color: rgb(51, 56, 153);">+ Photo</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body text-center">
+            <div class="modal-body text-center" *ngIf="successimg">
                 <div class="mb-3">
                 <label for="imageuploadInput" class="pointer">
                 <div class="bfile fontthai" style="margin-left: 5px; cursor: pointer;">
@@ -119,10 +129,16 @@
                     <img [src]="imageUrl" alt="" class="imgaddphosize img-fluid mx-auto">
                 </div>
                 <div class="mb-3">
-                    <h1 class="col-form-label fontfacemash" style="color: rgb(51, 56, 153);">Name Photo :</h1>
+                    <h1 class="col-form-label fontfacemash" style="color: rgb(51, 56, 153);">Photo Name :</h1>
                     <input type="text" class="form-control" id="addphotoname" #nameimginput>
+                    <small *ngIf="!cheackname" class="text-danger">Please input photo name</small>
                 </div>
                 <button class="bpro fontthai" (click)="addimg(nameimginput.value,User[0].uid)"> Send </button>
+            </div>
+            <div *ngIf="!successimg">
+                <div class="modal-body text-center">
+                    <h1 class="col-form-label fontfacemash" style="color: rgb(51, 56, 153);">You have 5 photos and cannot upload more photos.</h1>
+                </div>
             </div>
         </div>
     </div>

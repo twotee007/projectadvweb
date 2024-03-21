@@ -34,5 +34,8 @@ export interface ImgUser {
     voteDate: string;
     score: string;
     imgurl : string;
+    rankingyesterday : number;
+    rankingtoday :     number;
+    rankdifferent : number;
 }
 

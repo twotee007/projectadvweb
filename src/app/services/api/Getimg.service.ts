@@ -82,4 +82,50 @@ export class Getimgservice {
             throw error;
         }
     }
+    public async chageuser(name: string, note: string , uid: number,oldimg : string, file: File) {
+      const url = this.constants.API_ENDPOINT + '/profile/changeuser';
+      const formData = new FormData();
+      formData.append('name', name);
+      formData.append('note', note);
+      formData.append('oldimg', oldimg);
+      formData.append('file', file);
+      formData.append('uid', uid.toString()); // Convert uid to string
+
+      try {
+          const response = await this.http.put(url, formData).toPromise();
+          console.log(response);
+      } catch (error) {
+          throw error;
+      }
+  }
+
+  public async chageusername(name: string, note: string , uid: number) {
+    const url = this.constants.API_ENDPOINT + '/profile/upname';
+    const body = {
+      uid: uid,
+      name: name,
+      note: note,
+    };
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    try {
+      const response = await this.http.put(url, body, { headers: headers }).toPromise();
+      return true;
+    } catch (error) {
+      throw error;
+    }
+  }
+  public async updatepass(password: string ,uid: number) {
+    const url = this.constants.API_ENDPOINT + '/profile/uppass';
+    const body = {
+      uid: uid,
+      password: password,
+    };
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    try {
+      const response = await this.http.put(url, body, { headers: headers }).toPromise();
+      return true;
+    } catch (error) {
+      throw error;
+    }
+  }
 }

@@ -42,9 +42,24 @@ export class HomeComponent {
       }
 
       async loadImg(){
+        if (localStorage.getItem('votedImagesIds')) {
+          const votedImagesIds = JSON.parse(localStorage.getItem('votedImagesIds')!);
+          this.votedImagesIds = new Set<number>(votedImagesIds);
+          
+          const votedImagesCountString = localStorage.getItem('votedImagesCount');
+          if(votedImagesCountString){
+            this.votedImagesCount = parseInt(votedImagesCountString, 10);
+            console.log("cont",this.votedImagesCount);
+          }
+        }
         this.allimg = this.shuffleImages(await this.getimg.Getimg());
         this.totalImages = this.allimg.length;
         this.loadNextImages();
+        this.isLoading = false;
+        setTimeout(() => {
+          this.loadNextImages();
+          this.isLoading = true;
+      }, 2000); // 3000 milliseconds = 3 seconds
         this.show = true;
       }
 
@@ -90,21 +105,25 @@ export class HomeComponent {
 
         this.votedImagesIds.add(winnerImage.imgid);
         this.votedImagesIds.add(loserImage.imgid);
+        localStorage.setItem('votedImagesIds', JSON.stringify(Array.from(this.votedImagesIds)));
         this.votedImagesCount += 2;
-
+        localStorage.setItem('votedImagesCount', this.votedImagesCount.toString());
+    
         if (this.votedImagesCount === this.totalImages) {
           console.log('โหวตครบทุกรูปแล้ว');
           this.show = false;
           this.countdownSeconds = 5; // กำหนดเวลานับถอยหลังให้เริ่มต้นที่ 5 วินาที
           const intervalId = setInterval(() => {
             this.countdownSeconds--;
-      
+        
             if (this.countdownSeconds < 0) {
               clearInterval(intervalId);
               console.log('นับถอยหลังเสร็จสิ้น');
-              this.votedImagesCount = 0;
               this.votedImagesIds.clear();
-              this.loadImg();
+              localStorage.removeItem('votedImagesIds'); // ลบ votedImagesIds ใน localStorage
+              this.votedImagesCount = 0;
+              localStorage.removeItem('votedImagesCount'); // ลบ votedImagesIds ใน localStorage
+              this.loadImg(); // โหลดรูปใหม่
             }
           }, 1000); // นับถอยหลังทุก 1000 มิลลิวินาที (1 วินาที)
           return;
@@ -112,7 +131,7 @@ export class HomeComponent {
           this.isLoading = false;
           setTimeout(() => {
               this.loadNextImages();
-          }, 4000); // 3000 milliseconds = 3 seconds
+          }, 3000); // 3000 milliseconds = 3 seconds
       }
 
       }

@@ -23,7 +23,7 @@ export class DialogComponent implements OnInit {
     // หลังจาก 3 วินาที ปิดป้อบอัพ
     setTimeout(() => {
       this.dialogRef.close();
-    }, 4000);
+    }, 3000);
   }
   onNoClick(): void {
     this.dialogRef.close();
