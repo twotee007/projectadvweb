@@ -37,6 +37,7 @@ export class ProfileComponent implements OnInit {
   cheacknewpass : boolean = true;
   success : boolean = false;
   successimg : boolean = false;
+  cheakchange = true;
   todayrank : Getranktoday[] =[];
   yesterdayrank : Getranktoday[] =[];
   rank : Getranktoday[] = [];
@@ -169,5 +170,14 @@ export class ProfileComponent implements OnInit {
       this.imageUrluser = URL.createObjectURL(file);
       this.imgcheak = false;
     }
-   
+    changeimg: File | undefined;
+    changeimgurl : string | undefined;
+    currentImgId: number | undefined;
+    onFileSelectedimg(event: any, imgId: number) {
+      const file: File = event.target.files[0];
+      this.changeimg = file;
+      this.currentImgId = imgId;
+      this.changeimgurl = URL.createObjectURL(file);
+      this.cheakchange = false;
+    }
 }

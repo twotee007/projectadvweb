@@ -1,5 +1,5 @@
 <app-header></app-header>
-<div class="container text-center" style="margin-top: 110px;">
+<div class="container text-center" style="margin-top: 110px;" >
     <h2 class="slide-up">Profile</h2>
     <div *ngIf="User && User.length > 0" class="d-flex flex-column align-items-center">
         <img [src]="User && User[0] ? User[0].image : ''" alt="imageprofile" class="imgsize rounded-circle">
@@ -13,7 +13,7 @@
                 <button class="bpro" data-bs-target="#editpassword" data-bs-toggle="modal">Edit password</button>
             </div>
             <div class="col">
-                <button class="bpro" data-bs-target="#addphoto" data-bs-toggle="modal">+ Photo</button>
+                <button class="bpro" data-bs-target="#addphotonew" data-bs-toggle="modal">+ Photo</button>
             </div>
         </div>
         <mat-progress-bar mode="buffer"></mat-progress-bar>
@@ -30,30 +30,34 @@
                         <button class="bdele">Delete photo</button>
                     </div>
                 </div>
-                <div class="modal fade" id="addphoto{{img.imgid}}" aria-hidden="true" aria-labelledby="addphotolabel" tabindex="-1">
+                <div class="modal fade" [id]="'addphoto' + img.imgid" aria-hidden="true" aria-labelledby="addphoto" tabindex="-1">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h1 class="modal-title fs-5 fontfacemash" id="addphotolabel" style="color: rgb(51, 56, 153);">+ Photo</h1>
+                                <h1 class="modal-title fs-5 fontfacemash" id="addphoto" style="color: rgb(51, 56, 153);">+ Photo</h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body text-center">
                                 <div class="mb-3">
-                                <label for="imageuploadInput" class="pointer">
-                                <div class="bfile fontthai" style="margin-left: 5px; cursor: pointer;">
-                                    <div class="bfile-container">Change Photo</div>
+                                    <label for="imageuploadInput{{img.imgid}}" class="pointer">
+                                        <div class="bfile fontthai" style="margin-left: 5px; cursor: pointer;">
+                                            <div class="bfile-container">Change Photo</div>
+                                        </div>
+                                        <input type="file" id="imageuploadInput{{img.imgid}}" style="display: none;" (change)="onFileSelectedimg($event, img.imgid)">
+                                    </label>
                                 </div>
-                                <input type="file" id="imageuploadInput" style="display: none;" (change)="onFileSelected($event)">
-                                </label>
+                                <div *ngIf="img.imgid === currentImgId; else nochange">
+                                    <img [src]="changeimgurl" alt="" class="imgaddphosize img-fluid mx-auto">
                                 </div>
-                                    <img *ngIf="imageUrluser" [src]="imageUrluser" alt="" class="imgaddphosize img-fluid mx-auto">
-                                    <img *ngIf="imgcheak" src="{{img.imgurl}}" alt="" class="imgaddphosize img-fluid mx-auto">
+                                <ng-template #nochange>
+                                    <img [src]="img.imgurl" alt="" class="imgaddphosize img-fluid mx-auto">
+                                </ng-template>
                                 <div class="mb-3">
                                     <h1 class="col-form-label fontfacemash" style="color: rgb(51, 56, 153);">Photo Name :</h1>
-                                    <input type="text" class="form-control" id="addphotoname" #nameimginput>
+                                    <input type="text" class="form-control" id="addphotoname{{img.imgid}}" #nameimginput>
                                     <small *ngIf="!cheackname" class="text-danger">Please input photo name</small>
                                 </div>
-                                <button class="bpro fontthai" (click)="addimg(nameimginput.value,User[0].uid)"> Send </button>
+                                <button class="bpro fontthai" (click)="addimg(nameimginput.value, User[0].uid)"> Send </button>
                             </div>
                         </div>
                     </div>
@@ -75,7 +79,7 @@
                 <h1 class="modal-title fs-5 fontfacemash" id="editprofilelabel" style="color: rgb(51, 56, 153);">Edit profile</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body text-center">
+            <div class="modal-body text-center" *ngIf="User && User.length > 0">
                 <img *ngIf="imageUrluser" [src]="imageUrluser" alt="" class="imgpsize rounded-circle mx-auto">
                 <img *ngIf="imgcheak" src="{{User[0].image}}" alt="" class="imgpsize rounded-circle mx-auto">
                 <label for="imageInput" class="pointer">
@@ -137,11 +141,11 @@
     </div>
 </div>
 
-<div class="modal fade" id="addphoto" aria-hidden="true" aria-labelledby="addphotolabel" tabindex="-1">
+<div class="modal fade" id="addphotonew" aria-hidden="true" aria-labelledby="addphotonewlabel" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5 fontfacemash" id="addphotolabel" style="color: rgb(51, 56, 153);">+ Photo</h1>
+                <h1 class="modal-title fs-5 fontfacemash" id="addphotonewlabel" style="color: rgb(51, 56, 153);">+ Photo</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body text-center" *ngIf="successimg">
@@ -171,5 +175,6 @@
         </div>
     </div>
 </div>
+
 
 
