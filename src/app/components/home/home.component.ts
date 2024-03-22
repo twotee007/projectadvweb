@@ -53,7 +53,8 @@ export class HomeComponent {
           }
         }
         this.allimg = this.shuffleImages(await this.getimg.Getimg());
-        this.totalImages = this.allimg.length;
+        this.totalImages = Math.floor(this.allimg.length/2);
+        
         this.loadNextImages();
         this.isLoading = false;
         setTimeout(() => {
@@ -106,7 +107,7 @@ export class HomeComponent {
         this.votedImagesIds.add(winnerImage.imgid);
         this.votedImagesIds.add(loserImage.imgid);
         localStorage.setItem('votedImagesIds', JSON.stringify(Array.from(this.votedImagesIds)));
-        this.votedImagesCount += 2;
+        this.votedImagesCount += 1;
         localStorage.setItem('votedImagesCount', this.votedImagesCount.toString());
     
         if (this.votedImagesCount === this.totalImages) {

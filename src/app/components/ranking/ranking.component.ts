@@ -41,16 +41,22 @@ export class RankingComponent implements OnInit {
     updaterank(todayrank: Getranktoday[], yesterdayrank: Getranktoday[]): void {
         for (let i = 0; i < todayrank.length; i++) {
             let ranknow: Getranktoday = { ...todayrank[i] };
-            for(let j=0;j<yesterdayrank.length;j++){
-                if(todayrank[i].name == yesterdayrank[j].name){
+            let foundYesterday = false; // เพิ่มตัวแปรเพื่อตรวจสอบว่ามีข้อมูลจาก yesterdayrank หรือไม่
+            for (let j = 0; j < yesterdayrank.length; j++) {
+                if (todayrank[i].name === yesterdayrank[j].name) {
                     ranknow.rankdifferent = yesterdayrank[j].rankingyesterday - todayrank[i].rankingtoday;
-                    ranknow.rankingyesterday = yesterdayrank[j].rankingyesterday
+                    ranknow.rankingyesterday = yesterdayrank[j].rankingyesterday;
                     this.rankold.push(ranknow);
+                    foundYesterday = true; // กำหนดค่าเป็น true เมื่อพบข้อมูลจาก yesterdayrank
+                    break; // หยุดการวนลูปหากพบข้อมูลจาก yesterdayrank
                 }
             }
+            if (!foundYesterday) {
+                this.rankold.push(ranknow);
             }
-            this.rank = this.rankold.slice(0,10);
-            console.log(this.rank);
+        }
+        this.rank = this.rankold.slice(0, 10);
+        console.log(this.rank);
         }
         
     onSelectPlayer(player: any) {

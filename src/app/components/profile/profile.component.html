@@ -17,31 +17,34 @@
             </div>
         </div>
         <mat-progress-bar mode="buffer"></mat-progress-bar>
+    </div>
+</div>
+        <div class="container text-center">
         <div class="row mt-3" *ngIf="imgUser.length > 0">
             <div class="col-md-3 mt-3" *ngFor="let img of imgUser">
                 <div class="card" style="background-color:  rgb(51, 56, 153); ">
-                    <img src="{{img.imgurl}}" alt="" class="card-img-top img-fluid rounded">
+                    <img src="{{img.imgurl}}" alt="" class="card-img-top img-fluid imgloppsize rounded">
                     <div class="card-body text-left" style="color: rgb(255, 255, 255);">
                         <h3 class="fontfacemash">{{img.name}}</h3>
                         <h6 class="fontfacemash">Elo ranting : <span class="text">{{img.score}}</span></h6>
                         <h6 class="fontfacemash">Today Ranking : <span class="text">{{img.rankingtoday}}</span></h6>
                         <h6 class="fontfacemash">Yesterday Ranking : <span class="text">{{img.rankingyesterday}}</span></h6>
-                        <button class="bcha" style="margin-bottom: 5px;" [attr.data-bs-target]="'#addphoto' + img.imgid" data-bs-toggle="modal">Change photo</button>
-                        <button class="bdele">Delete photo</button>
+                        <button class="bcha" style="margin-bottom: 8px;" [attr.data-bs-target]="'#addphoto' + img.imgid" data-bs-toggle="modal">Change photo</button>
+                        <button class="bdele" [attr.data-bs-target]="'#deletephoto' + img.imgid" data-bs-toggle="modal" >Delete photo</button>
                     </div>
                 </div>
                 <div class="modal fade" [id]="'addphoto' + img.imgid" aria-hidden="true" aria-labelledby="addphoto" tabindex="-1">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h1 class="modal-title fs-5 fontfacemash" id="addphoto" style="color: rgb(51, 56, 153);">+ Photo</h1>
+                                <h1 class="modal-title fs-5 fontfacemash" id="addphoto" style="color: rgb(51, 56, 153);">Change photo</h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body text-center">
                                 <div class="mb-3">
                                     <label for="imageuploadInput{{img.imgid}}" class="pointer">
                                         <div class="bfile fontthai" style="margin-left: 5px; cursor: pointer;">
-                                            <div class="bfile-container">Change Photo</div>
+                                            <div class="bfile-container ">Change Photo</div>
                                         </div>
                                         <input type="file" id="imageuploadInput{{img.imgid}}" style="display: none;" (change)="onFileSelectedimg($event, img.imgid)">
                                     </label>
@@ -62,6 +65,23 @@
                         </div>
                     </div>
                 </div>
+                <div class="modal fade" [id]="'deletephoto' + img.imgid" aria-hidden="true" aria-labelledby="deletephotolabel" tabindex="-1">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5 fontfacemash " id="deletephotolabel" style="color: rgb(51, 56, 153);">Delete Photo</h1>
+                            </div>
+                            <div class="modal-body text-center">
+                                    <img [src]="img.imgurl" alt="" class="imgaddphosize img-fluid mx-auto">
+                                <div class="mb-3 mt-3">
+                                    <h4>คุณจะลบภาพนี้จริงๆใช่ไหม</h4>
+                                    <button class="bdele" style=" margin-right: 10px;" >Yes</button>
+                                    <button class="bcha" data-bs-dismiss="modal" aria-label="Close" >NO</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -69,7 +89,8 @@
             <h1  class="slide-up-text" style="font-size: 20px;">The user has not logged in yet. Please log in to access your profile page.</h1>
             <button routerLink="/login">Go to login</button>
     </div>
-</div>
+
+
 
 
 <div class="modal fade" id="editprofile" aria-hidden="true" aria-labelledby="editprofilelabel" tabindex="-1">

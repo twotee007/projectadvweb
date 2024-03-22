@@ -141,7 +141,7 @@
 .imgaddphosize{
   width: 300px;
   height: 300px;
-  object-fit: cover; /* ทำให้ภาพปรับตามขนาด container และตัดเอาส่วนที่เหลือ */
+  object-fit: cover;
 }
 .loading-container {
   position: fixed;
@@ -176,18 +176,23 @@
 }
 .centered-content {
   display: flex;
-  flex-direction: column; /* จัดวางเนื้อหาเป็นคอลัมน์ */
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 50vh; /* ให้สูงเท่ากับความสูงของหน้าจอ */
+  height: 50vh; 
 }
 
 .centered-content button {
-  margin-top: 20px; /* เพิ่มระยะห่างด้านบนของปุ่ม */
+  margin-top: 20px; 
 
 }
 button {
   color: rgb(51, 56, 153);
-  box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.8); /* เงาขนาด 2px ขวาและ 2px ล่าง ความเข้ม 4px โดยใช้สีดำโปร่งใส */
-  border-radius: 5px; /* กำหนดขนาดของมุมให้โค้ง 10px */
+  box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.8); 
+  border-radius: 5px; 
+}
+.imgloppsize{
+  width: 305px;
+  height: 305px;
+  object-fit: cover; 
 }
