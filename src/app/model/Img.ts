@@ -30,6 +30,7 @@ export interface VoteImg {
 
 export interface ImgUser {
     imgid: number;
+    uid : number;
     name : string;
     voteDate: string;
     score: string;

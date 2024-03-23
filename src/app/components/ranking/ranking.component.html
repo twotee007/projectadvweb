@@ -2,7 +2,7 @@
 <div class="ranking-container">
     <h2 class="slide-up">Top 10 Ranking</h2>
     <ul class="player-list" *ngIf="User">
-        <li class="player-item" *ngFor="let player of rank; let i = index" (mouseenter)="onSelectPlayer(player)"
+        <li class="player-item slide" *ngFor="let player of rank; let i = index" (mouseenter)="onSelectPlayer(player)"
             (mouseleave)="onMouseLeave()">
             <div class="player-details">
                 <span class="player-position">{{ i + 1 }}</span>

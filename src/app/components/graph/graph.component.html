@@ -3,7 +3,7 @@
 <div class="wrapper">
   <div *ngIf="isLoading" class="loading">Loading...</div>
   <div *ngIf="!isLoading && getimg && getimg.length > 0" class="chart-container-wrapper container">
-    <div *ngFor="let img of getimg" class="row chart-and-image-container">
+    <div *ngFor="let img of getimg" class="row chart-and-image-container slide">
       <div class="chart-container">
         <h2 style="margin-top: 20px; text-align: center;">{{ img.name }}</h2>
         <canvas [id]="'myChart' + img.imgid" #chartCanvas></canvas>

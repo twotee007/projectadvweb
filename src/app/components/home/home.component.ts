@@ -165,13 +165,15 @@ export class HomeComponent {
         const loserNewRating = Math.round(kFactorLoser * (actualLoserProbability - expectedLoserProbability));
         console.log("winnerNewRating : "+winnerNewRating);
         console.log("loserNewRating : "+loserNewRating);        
-
+        const winnerra = kFactorWinner * (actualWinnerProbability - expectedwinProbability);
         this.imgwinner.push(winner);
         this.imgloser.push(loser);
         console.log(this.imgwinner);
         console.log(this.imgloser);
+        const winnerpop = "1 / ( 1 + 10 **(("+loser.score+" - "+winner.score+") / 400)) = "+ expectedwinProbability.toFixed(2);
+        const pointpop = kFactorWinner+" * (1 - "+expectedwinProbability.toFixed(2)+") = "+winnerra.toFixed(2);
 
-        this.openDialog(winner.score, winner.imgurl, winnerNewRating ,winner.name);
+        this.openDialog(winner.score, winner.imgurl, winnerNewRating ,winner.name,winnerpop,pointpop,loser.score,kFactorWinner,kFactorLoser);
         const checkwinner = await this.getimg.InsertVote(winner.uid, winner.imgid, winnerNewRating, winner.isWinner);
         if (checkwinner === true) {
             winner.score = winnerNewRating + winner.score;
@@ -185,11 +187,15 @@ export class HomeComponent {
         }
         
       }
-      openDialog(winnerScore: number, winnerImageSrc: string, winnerrat: number , winnername : string): void {
+      openDialog(winnerScore: number, winnerImageSrc: string, winnerrat: number 
+                 , winnername : string, winnerpop : string , pointpop : string
+                 ,loserScore : number,kFactorWinner : number,kFactorLoser : number): void {
         const dialogRef = this.dialog.open(DialogComponent, {
-          width: '550px',
-          height : '550px', // ปรับเปลี่ยนขนาดตามความต้องการ
-          data: { winnerScore: winnerScore, winnerImageSrc: winnerImageSrc, Winnerrat: winnerrat, winnername : winnername }// ส่ง array ข้อมูลไปให้ Dialog
+          width: '670px',
+          height : '670px', // ปรับเปลี่ยนขนาดตามความต้องการ
+          data: { winnerScore: winnerScore, winnerImageSrc: winnerImageSrc
+                  , Winnerrat: winnerrat, winnername : winnername, winnerpop:winnerpop
+                  ,pointpop:pointpop,loserScore:loserScore,kFactorWinner:kFactorWinner,kFactorLoser:kFactorLoser }// ส่ง array ข้อมูลไปให้ Dialog
         });
       
         dialogRef.afterClosed().subscribe(result => {

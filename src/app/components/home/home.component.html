@@ -3,7 +3,7 @@
   <div *ngIf="countdownSeconds > 0" class="centered">
     <p>โหวตครบทุกรูปแล้วจะสามารถโหวตใหม่ได้ในเวลา: {{ countdownSeconds }} วินาที</p>
 </div>
-    <div class="voting-container">
+    <div class="voting-container slide">
         <div *ngIf="show && selectedImages && selectedImages.length >= 2" >
         <mat-card>
           <mat-card-header>
@@ -21,12 +21,12 @@
       </div>
       </div>
       <div *ngIf="show">
-      <div class="vs">
+      <div class="vs slide">
         <h3>{{votedImagesCount}} / {{totalImages}}</h3>
         <img src="https://cdn-icons-png.flaticon.com/256/9150/9150926.png" alt="VS">
       </div>
     </div>
-      <div class="voting-container">
+      <div class="voting-container slide">
         <div *ngIf="show && selectedImages && selectedImages.length >= 2">
         <mat-card>
           <mat-card-header>

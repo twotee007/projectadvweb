@@ -106,7 +106,7 @@ export class ProfileComponent implements OnInit {
       if(this.imgUser.length >= 5){
         this.successimg = false;
       }
-      console.log(this.imgUser);
+      console.log("ImgUSer",this.imgUser);
     }
     async addimg(name: string, userid: number,){
       if(name.trim() === '' ){
@@ -174,7 +174,21 @@ export class ProfileComponent implements OnInit {
         }
 
         }
-    
+        async Deleteimg(imgid: number,uid: number,imgurl: string) {
+          this.isLoading = false;
+          const cheackdeimg = await this.getimgservice.Deleteimg(imgid,uid);
+          if(cheackdeimg){
+            const cheackdeurl = await this.getimgservice.Deleteurl(imgurl);
+            if(cheackdeurl){
+              window.location.reload();
+            }else{
+              this.isLoading = true;
+            }
+          }else{
+            console.log("ERROR");
+            
+          }
+        }
     onFileSelected(event: any) {
       const file: File = event.target.files[0];
       this.image = file;

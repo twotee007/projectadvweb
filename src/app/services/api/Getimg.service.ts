@@ -128,4 +128,27 @@ export class Getimgservice {
       throw error;
     }
   }
+  public async Deleteimg(imgid : number,uid : number){
+    const url = this.constants.API_ENDPOINT + '/profile/deleteimg/'+imgid+'/'+uid;
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    try {
+      const response = await this.http.delete(url, { headers: headers }).toPromise();
+      return true;
+    } catch (error) {
+      throw error;
+    }
+  }
+  public async Deleteurl(imgurl : string) {
+    const url = this.constants.API_ENDPOINT + '/profile/Deleteurl';
+    const body = {
+      imgurl: imgurl,
+    };
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    try {
+      const response = await this.http.put(url, body, { headers: headers }).toPromise();
+      return true;
+    } catch (error) {
+      throw error;
+    }
+  }
 }

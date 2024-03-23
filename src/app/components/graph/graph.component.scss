@@ -57,6 +57,9 @@ canvas {
     transform: translateY(0);
   }
 }
+.slide {
+  animation: slideUp 0.5s ease-out;
+}
 .centered-content {
   display: flex;
   flex-direction: column; /* จัดวางเนื้อหาเป็นคอลัมน์ */

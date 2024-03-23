@@ -4,15 +4,16 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { CatmashService } from '../../services/api/catmash.service';
 import { SignupData, User } from '../../model/signup_post';
-import { Router } from '@angular/router';
+import { Router,RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Getimgservice } from '../../services/api/Getimg.service';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [MatInputModule,MatIconModule,MatFormFieldModule,CommonModule,MatProgressSpinnerModule],
+  imports: [MatInputModule,MatIconModule,MatFormFieldModule,CommonModule,MatProgressSpinnerModule,RouterModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
