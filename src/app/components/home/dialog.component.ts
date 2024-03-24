@@ -12,7 +12,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
     <h3>Chance Win</h3>
     <h5>RWinng : <span class="red-text">{{data.winnerScore}}</span> | RLoser : <span class="red-text">{{data.loserScore}}</span></h5>
     <h5>kFactorWinner : <span class="red-text">{{data.kFactorWinner}}</span> | kFactorLoser : <span class="red-text">{{data.kFactorLoser}}</span></h5>
-    <h5>{{data.winnerpop}}</h5>
+    <h5 class="red-text">{{data.winnerpop}}</h5>
     <h3>Points</h3>
     <h5 class="red-text">{{data.pointpop}}</h5>
     <h5 class="red-text"><span>{{data.winnerScore}}</span> + {{data.Winnerrat}}</h5>
