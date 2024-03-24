@@ -10,13 +10,13 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
     <h1 mat-dialog-title>{{data.winnername}} Winner!!!</h1>
     <img [src]="data.winnerImageSrc" alt="Winner Image" style="width: 300px; display: block; margin: 0 auto; border-radius: 15px;">
     <h3>Chance Win</h3>
-    <h5>RWinng : {{data.winnerScore}} | RLoser : {{data.loserScore}}</h5>
-    <h5>kFactorWinner : {{data.kFactorWinner}} | kFactorLoser : {{data.kFactorLoser}}</h5>
+    <h5>RWinng : <span class="red-text">{{data.winnerScore}}</span> | RLoser : <span class="red-text">{{data.loserScore}}</span></h5>
+    <h5>kFactorWinner : <span class="red-text">{{data.kFactorWinner}}</span> | kFactorLoser : <span class="red-text">{{data.kFactorLoser}}</span></h5>
     <h5>{{data.winnerpop}}</h5>
     <h3>Points</h3>
-    <h5>{{data.pointpop}}</h5>
-    <h5>{{data.winnerScore }} + {{data.Winnerrat}}</h5>
-    <h3>Newscore => {{data.winnerScore + data.Winnerrat}}</h3>
+    <h5 class="red-text">{{data.pointpop}}</h5>
+    <h5 class="red-text"><span>{{data.winnerScore}}</span> + {{data.Winnerrat}}</h5>
+    <h3>Newscore => <span class="red-text">{{data.winnerScore + data.Winnerrat}}</span></h3>
   </div>
 </div>
   `,

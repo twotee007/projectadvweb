@@ -1,4 +1,7 @@
 <app-header></app-header>
+<div class="voting-summary">
+  <h2 class="slide">จำนวนการโหวต{{votedImagesCount}} / {{totalImages}}ทั้งหมด</h2>
+</div>
 <body>
   <div *ngIf="countdownSeconds > 0" class="centered">
     <p>โหวตครบทุกรูปแล้วจะสามารถโหวตใหม่ได้ในเวลา: {{ countdownSeconds }} วินาที</p>
@@ -10,8 +13,10 @@
             <h3 *ngIf="isLoading">{{selectedImages[0].name}}</h3>
           </mat-card-header>
           <mat-card-content>
-            <div class="image-containerr" *ngIf="!isLoading">
-              <mat-spinner class="spinner"></mat-spinner>
+            <div class="image-container" *ngIf="!isLoading">
+              <div class="spinner-container">
+                  <mat-spinner class="spinner"></mat-spinner>
+              </div>
           </div>
                 <div class="image-container" (click)="onImageClick(0)" *ngIf="isLoading">
                   <img [src]="selectedImages[0].imgurl" alt="Image 1">
@@ -22,7 +27,6 @@
       </div>
       <div *ngIf="show">
       <div class="vs slide">
-        <h3>{{votedImagesCount}} / {{totalImages}}</h3>
         <img src="https://cdn-icons-png.flaticon.com/256/9150/9150926.png" alt="VS">
       </div>
     </div>
@@ -33,8 +37,10 @@
             <h3 *ngIf="isLoading">{{selectedImages[1].name}}</h3>
           </mat-card-header>
           <mat-card-content>
-            <div class="image-containerr" *ngIf="!isLoading">
-              <mat-spinner class="spinner"></mat-spinner>
+            <div class="image-container" *ngIf="!isLoading">
+              <div class="spinner-container">
+                  <mat-spinner class="spinner"></mat-spinner>
+              </div>
           </div>
               <div class="image-container" (click)="onImageClick(1)" *ngIf="isLoading">
                 <img [src]="selectedImages[1].imgurl" alt="Image 2">
@@ -43,6 +49,7 @@
         </mat-card>
             </div>
         </div>
+     
   </body>
   <footer>
     <p>Copyright © 2024 All Rights Reserved.</p>

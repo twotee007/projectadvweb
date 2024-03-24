@@ -3,6 +3,7 @@ body {
     justify-content: space-around;
     align-items: center;
   }
+  
   mat-card{
     border-radius: 10px;
     background-color: rgba(197, 197, 190, 0.814);
@@ -106,3 +107,21 @@ body {
   .slide {
     animation: slideUp 0.5s ease-out;
   }
+  .spinner-container {
+    width: 100%; /* กำหนดขนาดของสปินเนอร์เท่ากับขนาดของ div */
+    height: 100%; /* กำหนดขนาดของสปินเนอร์เท่ากับขนาดของ div */
+    display: flex;
+    justify-content: center; /* จัดตำแหน่งตรงกลางแนวนอน */
+    align-items: center; /* จัดตำแหน่งตรงกลางแนวตั้ง */
+}
+.voting-summary {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 120px;
+  margin-bottom: -100px;
+}
+.red-text {
+  color: red;
+}
