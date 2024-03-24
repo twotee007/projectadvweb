@@ -204,6 +204,8 @@ export class ProfileComponent implements OnInit {
                 const checkimg = await this.getimgservice.chageimguser(name,imgid,uid,imgurl,file);
                 if(checkimg){
                   window.location.reload();
+                }else{
+                  console.log("Error",checkimg);
                 }
                 
             }

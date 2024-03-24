@@ -2,8 +2,7 @@
 <div class="ranking-container">
     <h2 class="slide-up">Top 10 Ranking</h2>
     <ul class="player-list" *ngIf="User">
-        <li class="player-item slide" *ngFor="let player of rank; let i = index" (mouseenter)="onSelectPlayer(player)"
-            (mouseleave)="onMouseLeave()">
+        <li class="player-item slide" *ngFor="let player of rank; let i = index" (click)="lookuser(player.uid)" >
             <div class="player-details">
                 <span class="player-position">{{ i + 1 }}</span>
                 <img [src]="player.imgurl" alt="{{ player.name }}" class="player-image">
@@ -27,17 +26,7 @@
             </div>
         </li>
     </ul>
-    <div class="popup-container" *ngIf="selectedPlayer">
-        <div class="popup-content">
-            <img [src]="selectedPlayer.imgurl" alt="{{ selectedPlayer.name }}" class="popup-image">
-            <div class="popup-details">
-                <span class="popup-name">{{ selectedPlayer.name }}</span>
-                <span class="popup-position">Position: {{ selectedPlayer.position }}</span>
-                <span class="popup-rating">Elo Rating: {{ selectedPlayer.score }}</span>
-            </div>
-        </div>
-    </div>
-</div>
+
 <div *ngIf="!User" class="centered-content">
     <h1 class="slide-up-text" style="font-size: 20px;">User has not logged in yet. Please login first to view the ranking page.</h1>
     <button routerLink="/login" class="slide-up-button">Go to Login</button>

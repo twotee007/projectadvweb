@@ -3,6 +3,7 @@ import { Constants } from '../../config/constans';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, lastValueFrom } from 'rxjs';
 import { GetImg, Getranktoday, ImgUser, VoteImg } from '../../model/Img';
+import { User } from '../../model/signup_post';
 @Injectable({
   providedIn: 'root'
 })
@@ -15,7 +16,7 @@ export class Getimgservice {
         const response = await lastValueFrom(this.http.get(url));
         return response as GetImg[];
       }
-
+      
       public async InsertVote(userid: number, imgid: number, score: number, isWinner: boolean ) {
         const url = this.constants.API_ENDPOINT + '/vote/insertimg';
         const body = {
@@ -67,7 +68,11 @@ export class Getimgservice {
         const response = await lastValueFrom(this.http.get(url));
         return response as ImgUser[];
       }
-
+      public async GetUser(uid: number) {
+        const url = this.constants.API_ENDPOINT + "/profile/seuser/" + uid;
+        const response = await lastValueFrom(this.http.get(url));
+        return response as User[];
+      }
       public async insertimg(name: string, uid: number, file: File) {
         const url = this.constants.API_ENDPOINT + '/profile/addimg';
         const formData = new FormData();

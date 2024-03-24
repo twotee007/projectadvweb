@@ -5,7 +5,7 @@ import { NgFor } from '@angular/common';
 import { Getranktoday } from '../../model/Img';
 import { CommonModule } from '@angular/common';
 import { User } from '../../model/signup_post';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
     selector: 'app-ranking',
@@ -23,7 +23,7 @@ export class RankingComponent implements OnInit {
     rankold : Getranktoday[] = [];
     selectedPlayer: any;
     User : User[] = [];
-    constructor(private getimgservice: Getimgservice) {}
+    constructor(private getimgservice: Getimgservice,private router: Router) {}
 
     ngOnInit(): void {
         this.loadPlayerRankings(); // เรียกเมธอดเมื่อคอมโพเนนต์ถูกโหลด
@@ -57,6 +57,9 @@ export class RankingComponent implements OnInit {
         }
         this.rank = this.rankold.slice(0, 10);
         console.log(this.rank);
+        }
+        lookuser(uid: number) {
+            this.router.navigate(['/otherprofile'], { queryParams: { uid: uid } });
         }
         
     onSelectPlayer(player: any) {
