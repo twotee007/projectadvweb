@@ -1,0 +1,26 @@
+<app-headeradmid></app-headeradmid>
+<table>
+  <thead>
+    <tr>
+      <th>Avatar</th>
+      <th>Username</th>
+      <th>Name</th>
+      <th>Data</th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngIf="users && users.length > 0; else noUsersFound">
+      <tr *ngFor="let user of users">
+        <td><img [src]="user.image" alt="Avatar"></td>
+        <td>{{ user.username }}</td>
+        <td>{{ user.name }}</td>
+        <td>{{ user.createDate }}</td>
+      </tr>
+    </ng-container>
+    <ng-template #noUsersFound>
+      <tr>
+        <td colspan="4">No users found.</td>
+      </tr>
+    </ng-template>
+  </tbody>
+</table>

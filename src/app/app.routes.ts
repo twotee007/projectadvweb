@@ -5,6 +5,8 @@ import { HomeComponent } from './components/home/home.component';
 import { RankingComponent } from './components/ranking/ranking.component';
 import { GraphComponent } from './components/graph/graph.component';
 import { OtherprofileComponent } from './components/otherprofile/otherprofile.component';
+// import { UserListComponent } from './components/userlist/userlist.component';
+import { AdmidComponent } from './components/admin/admin.component';
 
 export const routes: Routes = [
     {path:'',component:HomeComponent},
@@ -12,5 +14,8 @@ export const routes: Routes = [
     {path : 'profile',component:ProfileComponent},
     {path : 'login',component:LoginComponent},
     {path : 'graph',component:GraphComponent},
-    {path : 'otherprofile',component:OtherprofileComponent}
+    {path : 'otherprofile',component:OtherprofileComponent},
+    {path : 'admin',component:AdmidComponent},
+    // {path : 'userlist',component:UserListComponent}
+
 ];

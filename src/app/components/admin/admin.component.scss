@@ -1,0 +1,49 @@
+.welcome-container {
+    text-align: center;
+    margin-top: 150px; // ปรับตำแหน่งของ welcome-container ตามความต้องการ
+  }
+  
+  .welcome-message {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .statistics-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .blue-block {
+    background-color: rgb(51, 56, 153); // สีพื้นหลังของ blue-block
+    color: #fff; // สีข้อความใน blue-block
+    border: 2px solid #fffefe;
+    display: flex;
+    align-items: center;
+    width: 250px;
+    height: 110px;
+    border-radius: 10px; // ทำเส้นโค้งให้กับ blue-block
+    padding: 30px; // การเพิ่มเส้นขอบรอบ blue-block
+    margin: 10px; // การเพิ่มระยะห่างรอบๆ blue-block
+    box-shadow: 2px 2px 5px rgba(56, 14, 14, 0.167); /* เพิ่มเงาให้กรอบ */
+  }
+  
+  .logo-image {
+    width: 40px; // ขนาดของโลโก้
+    height: 40px; // ขนาดของโลโก้
+    margin-right: 20px; // ระยะห่างระหว่างโลโก้กับข้อความ
+  }
+  
+  .text-content {
+   padding: 18px;
+  }
+  
+  .title {
+    font-size: 18px;
+  }
+  
+  .value {
+    font-size: 20px;
+    padding: 0px;
+  }
+  
