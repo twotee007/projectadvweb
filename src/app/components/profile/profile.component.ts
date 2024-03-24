@@ -189,6 +189,32 @@ export class ProfileComponent implements OnInit {
             
           }
         }
+        async changetimguser(name: string,uid: number,imgurl: string,imgid: number) {
+          if(name.trim() === '' ){
+            this.cheackname = false;
+          return;
+          }
+          try {
+            this.isLoading = false;
+            
+            if (this.changeimg) {
+                // ส่งไฟล์ไปยัง API เพื่ออัปโหลด
+                const file: File = this.changeimg;
+                console.log('File uploaded successfully',file);
+                const checkimg = await this.getimgservice.chageimguser(name,imgid,uid,imgurl,file);
+                if(checkimg){
+                  window.location.reload();
+                }
+                
+            }
+            // ลงทะเบียนผู้ใช้หลังจากที่อัปโหลดไฟล์เสร็จสิ้น;
+        } catch (error) {
+            console.error('Signup failed:', error);
+            alert("Signup failed");
+        }
+          }
+          
+      
     onFileSelected(event: any) {
       const file: File = event.target.files[0];
       this.image = file;

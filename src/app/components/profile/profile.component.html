@@ -60,7 +60,7 @@
                                     <input type="text" class="form-control" id="addphotoname{{img.imgid}}" #nameimginput>
                                     <small *ngIf="!cheackname" class="text-danger">Please input photo name</small>
                                 </div>
-                                <button class="bpro fontthai" (click)="addimg(nameimginput.value, User[0].uid)"> Send </button>
+                                <button class="bpro fontthai" (click)="changetimguser(nameimginput.value, User[0].uid,img.imgurl,img.imgid)"> Send </button>
                             </div>
                         </div>
                     </div>

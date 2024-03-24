@@ -151,4 +151,21 @@ export class Getimgservice {
       throw error;
     }
   }
+  public async chageimguser(name: string ,imgid : number, uid: number,oldimg : string, file: File) {
+    const url = this.constants.API_ENDPOINT + '/profile/changeimg';
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('oldimg', oldimg);
+    formData.append('imgid', imgid.toString());
+    formData.append('file', file);
+    formData.append('uid', uid.toString());
+
+    try {
+        const response = await this.http.post(url, formData).toPromise();
+        console.log(response);
+        return true;
+    } catch (error) {
+        throw error;
+    }
+}
 }
