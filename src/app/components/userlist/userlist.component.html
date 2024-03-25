@@ -1,7 +1,8 @@
 <app-headeradmid></app-headeradmid>
-<table>
+<table style="margin-top: 200px;">
   <thead>
     <tr>
+      <th>Userid</th>
       <th>Avatar</th>
       <th>Username</th>
       <th>Name</th>
@@ -11,7 +12,8 @@
   <tbody>
     <ng-container *ngIf="users && users.length > 0; else noUsersFound">
       <tr *ngFor="let user of users">
-        <td><img [src]="user.image" alt="Avatar"></td>
+        <td>{{user.uid}}</td>
+        <td><img [src]="user.image" alt="Avatar" class="sizeimg"></td>
         <td>{{ user.username }}</td>
         <td>{{ user.name }}</td>
         <td>{{ user.createDate }}</td>
@@ -19,7 +21,7 @@
     </ng-container>
     <ng-template #noUsersFound>
       <tr>
-        <td colspan="4">No users found.</td>
+        <td colspan="5">No users found.</td>
       </tr>
     </ng-template>
   </tbody>

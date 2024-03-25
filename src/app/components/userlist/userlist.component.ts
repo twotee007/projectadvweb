@@ -1,33 +1,37 @@
-// import { Component, OnInit } from '@angular/core';
-// import { User } from '../../model/signup_post';
-// import { Getimgservice } from '../../services/api/Getimg.service';
-// import { CommonModule } from '@angular/common';
-// import { HeaderadmidComponent } from "../headeradmid/headeradmid.component";
-// import { Router, RouterModule } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { User } from '../../model/signup_post';
+import { Getimgservice } from '../../services/api/Getimg.service';
+import { CommonModule } from '@angular/common';
+import { HeaderadmidComponent } from "../headeradmid/headeradmid.component";
+import { Router, RouterModule } from '@angular/router';
+import { CatmashService } from '../../services/api/catmash.service';
 
 
 
-// @Component({
-//     selector: 'app-userlist',
-//     standalone: true,
-//     templateUrl: './userlist.component.html',
-//     styleUrls: ['./userlist.component.scss'], // แก้ styleUrl เป็น styleUrls
-//     imports: [CommonModule, HeaderadmidComponent, RouterModule]
-// })
-// export class UserListComponent implements OnInit {
-//    users: User[] = []; // Declare users array to hold user data
+@Component({
+    selector: 'app-userlist',
+    standalone: true,
+    templateUrl: './userlist.component.html',
+    styleUrls: ['./userlist.component.scss'], // แก้ styleUrl เป็น styleUrls
+    imports: [CommonModule, HeaderadmidComponent, RouterModule]
+})
+export class UserListComponent implements OnInit {
+   users: User[] = []; 
+   user: User[] = []; 
+   Admin : User[] = [];
+   oldadmin : User[] = [];
+  constructor(private getimgservice: Getimgservice,private getuser : CatmashService,private router: Router) {}
 
-//   constructor(private getimgservice: Getimgservice) {}
+  async ngOnInit(): Promise<void> {
+    if (localStorage.getItem('admin')) {
+        this.Admin = JSON.parse(localStorage.getItem('admin')!);
+        this.loadUsers(); 
+      }else{
+        this.router.navigate(['']);
+      }
+  }
 
-//   ngOnInit(): void {
-//     this.loadUsers(); // Call loadUsers method when component initializes
-//   }
-
-//   loadUsers(): void {
-//     this.getimgservice.GetUserall().then((users: User[]) => {
-//       this.users = users; // Assign received user data to users array
-//     }).catch(error => {
-//       console.error('Error loading users:', error);
-//     });
-//   }
-// }
+  async loadUsers(): Promise<void> {
+    this.users = await this.getuser.GetUserall();
+  }
+}

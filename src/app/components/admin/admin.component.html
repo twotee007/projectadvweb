@@ -4,18 +4,18 @@
         <h2> Welcome admin Catmadh</h2>
     </div>
     <div class="statistics-container">
-        <div class="blue-block">
+        <div class="blue-block"  routerLink="/userlist">
             <img class="logo-image" src="https://cdn-icons-png.flaticon.com/256/681/681494.png" alt="Logo">
             <div class="text-content">
                 <div class="title">User All:</div>
-                <div class="value">1568</div>
+                <div class="value">{{Users.length}}</div>
             </div>
         </div>
-        <div class="blue-block">
+        <div  class="blue-block" routerLink="/userlist">
             <img class="logo-image" src="https://cdn-icons-png.flaticon.com/256/1829/1829552.png" alt="Photo">
             <div class="text-content">
                 <div class="title">Photo All:</div>
-                <div class="value">8000</div>
+                <div class="value">{{img.length}}</div>
             </div>
         </div>
     </div>

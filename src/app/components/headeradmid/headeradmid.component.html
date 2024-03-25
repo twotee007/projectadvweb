@@ -1,14 +1,14 @@
 <header class="app-header">
     <div class="logo" >
       <!-- สร้างโลโก้ของคุณที่นี่ -->
-      <span routerLink="">Catmash Admin</span>
+      <span routerLink="/admin">Catmash Admin</span>
     </div>
     <nav class="navbar">
 
       <ul>
     
         <li><a routerLink="/userlist"><img src="https://cdn-icons-png.flaticon.com/256/681/681494.png" alt="userlist">User list</a></li>
-        <ng-container *ngIf="this.User.length; else nologin">
+        <ng-container *ngIf="this.Admin.length; else nologin">
           <li><a (click)="Logout()" style="cursor: pointer;"><img src="https://cdn-icons-png.flaticon.com/256/1828/1828427.png" alt="Logout">Logout</a></li>
         </ng-container>
         <ng-template #nologin>

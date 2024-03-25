@@ -36,6 +36,9 @@ export class LoginComponent{
         if(this.userlogin.length > 0 && this.userlogin[0].type === 'user'){
             localStorage.setItem('user', JSON.stringify(this.userlogin));
             this.router.navigate(['']);
+        }else if(this.userlogin.length > 0 && this.userlogin[0].type === 'admin'){
+          localStorage.setItem('admin', JSON.stringify(this.userlogin));
+            this.router.navigate(['admin']);
         }else{
           this.snackBar.open('Loging failed.', 'Close', {
             verticalPosition: 'top',

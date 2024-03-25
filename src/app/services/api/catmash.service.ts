@@ -20,7 +20,11 @@ export class CatmashService {
         const response = await lastValueFrom(this.http.get(url));
         return response as User[];
       }
-
+      public async GetUserall() {
+        const url = this.constants.API_ENDPOINT + "/login";
+        const response = await lastValueFrom(this.http.get(url));
+        return response as User[];
+      }
       public async SignupUser(name: string, username: string, password: string, type: string, file: File) {
         const url = this.constants.API_ENDPOINT + '/login/signup';
         const formData = new FormData();

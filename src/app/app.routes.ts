@@ -7,6 +7,7 @@ import { GraphComponent } from './components/graph/graph.component';
 import { OtherprofileComponent } from './components/otherprofile/otherprofile.component';
 // import { UserListComponent } from './components/userlist/userlist.component';
 import { AdmidComponent } from './components/admin/admin.component';
+import { UserListComponent } from './components/userlist/userlist.component';
 
 export const routes: Routes = [
     {path:'',component:HomeComponent},
@@ -16,6 +17,6 @@ export const routes: Routes = [
     {path : 'graph',component:GraphComponent},
     {path : 'otherprofile',component:OtherprofileComponent},
     {path : 'admin',component:AdmidComponent},
-    // {path : 'userlist',component:UserListComponent}
+    {path : 'userlist',component:UserListComponent}
 
 ];
