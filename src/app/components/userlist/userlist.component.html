@@ -1,39 +1,40 @@
 <app-headeradmid></app-headeradmid>
-<h2 style="margin-top: 100px; text-align: center;">User List</h2>
+<h2 style="margin-top: 100px; text-align: center;" >User List</h2>
 <div class="table-container">
   <table class="user-table">
-    <thead>
-      <tr>
-        <th>Userid</th>
-        <th>Avatar</th>
-        <th>Username</th>
-        <th>Name</th>
-        <th>Data</th>
+  <thead>
+    <tr>
+      <th>Userid</th>
+      <th>Avatar</th>
+      <th>Username</th>
+      <th>Name</th>
+      <th>Data</th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngIf="users && users.length > 0; else noUsersFound">
+      <tr *ngFor="let user of users">
+        <td>{{user.uid}}</td>
+        <td>
+          <!-- ใช้ routerLink บนรูปภาพ -->
+          <a [routerLink]="['/otherprofile']" [queryParams]="{ uid: user.uid }">
+            <img *ngIf="user.image; else defaultAvatar" [src]="user.image" alt="Avatar" class="avatar">
+            <ng-template #defaultAvatar>
+              <img src="https://cdn-icons-png.flaticon.com/256/3875/3875172.png" alt="Default Avatar" class="avatar">
+            </ng-template>
+          </a>
+        </td>
+        <td>{{ user.username }}</td>
+        <td>{{ user.name }}</td>
+        <td>{{ user.createDate }}</td>
       </tr>
-    </thead>
-    <tbody>
-      <ng-container *ngIf="users && users.length > 0; else noUsersFound">
-        <tr *ngFor="let user of users">
-          <td>{{user.uid}}</td>
-          <td>
-            <!-- ใช้ routerLink บนรูปภาพ -->
-            <a [routerLink]="['/otherprofile']" [queryParams]="{ uid: user.uid }">
-              <img *ngIf="user.image; else defaultAvatar" [src]="user.image" alt="Avatar" class="avatar">
-              <ng-template #defaultAvatar>
-                <img src="https://cdn-icons-png.flaticon.com/256/3875/3875172.png" alt="Default Avatar" class="avatar">
-              </ng-template>
-            </a>
-          </td>
-          <td>{{ user.username }}</td>
-          <td>{{ user.name }}</td>
-          <td>{{ user.createDate }}</td>
-        </tr>
-      </ng-container>
-      <ng-template #noUsersFound>
-        <tr>
-          <td colspan="5">No users found.</td>
-        </tr>
-      </ng-template>
-    </tbody>
-  </table>
+    </ng-container>
+    
+    <ng-template #noUsersFound>
+      <tr>
+        <td colspan="5">No users found.</td>
+      </tr>
+    </ng-template>
+  </tbody>
+</table>
 </div>

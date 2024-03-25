@@ -15,7 +15,7 @@ export const routes: Routes = [
     {path : 'profile',component:ProfileComponent},
     {path : 'login',component:LoginComponent},
     {path : 'graph',component:GraphComponent},
-    {path : 'otherprofile/:uid',component:OtherprofileComponent},//ดึงuidเเล้วไม่ได้จ้ะ จุ้บๆ
+    {path : 'otherprofile',component:OtherprofileComponent},//ดึงuidเเล้วไม่ได้จ้ะ
     {path : 'admin',component:AdminComponent},
     {path : 'userlist',component:UserListComponent}
 

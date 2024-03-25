@@ -58,8 +58,9 @@ export class RankingComponent implements OnInit {
         this.rank = this.rankold.slice(0, 10);
         console.log(this.rank);
         }
+        //ตืดเออเร่อตรงนี้นะจ้ะ
         lookuser(uid: number) {
-            this.router.navigate(['otherprofile'], { queryParams: { uid: uid } });
-        }
+            this.router.navigate(['/otherprofile'], { queryParams: { uid: uid } });
+          }
 }
 
