@@ -6,7 +6,7 @@ import { RankingComponent } from './components/ranking/ranking.component';
 import { GraphComponent } from './components/graph/graph.component';
 import { OtherprofileComponent } from './components/otherprofile/otherprofile.component';
 // import { UserListComponent } from './components/userlist/userlist.component';
-import { AdmidComponent } from './components/admin/admin.component';
+import { AdminComponent } from './components/admin/admin.component';
 import { UserListComponent } from './components/userlist/userlist.component';
 
 export const routes: Routes = [
@@ -15,8 +15,8 @@ export const routes: Routes = [
     {path : 'profile',component:ProfileComponent},
     {path : 'login',component:LoginComponent},
     {path : 'graph',component:GraphComponent},
-    {path : 'otherprofile',component:OtherprofileComponent},
-    {path : 'admin',component:AdmidComponent},
+    {path : 'otherprofile/:uid',component:OtherprofileComponent},//ดึงuidเเล้วไม่ได้จ้ะ จุ้บๆ
+    {path : 'admin',component:AdminComponent},
     {path : 'userlist',component:UserListComponent}
 
 ];

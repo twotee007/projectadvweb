@@ -13,7 +13,7 @@ import { Getimgservice } from '../../services/api/Getimg.service';
     styleUrl: './admin.component.scss',
     imports: [CommonModule, HeaderadmidComponent,RouterModule]
 })
-export class AdmidComponent {
+export class AdminComponent {
   constructor(private router: Router,private catmach : CatmashService,private getimg : Getimgservice) {}
   Admin : User[] = [];
   Users : User[]= [];

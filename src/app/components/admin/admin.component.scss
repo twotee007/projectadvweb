@@ -26,8 +26,11 @@
     padding: 30px; // การเพิ่มเส้นขอบรอบ blue-block
     margin: 10px; // การเพิ่มระยะห่างรอบๆ blue-block
     box-shadow: 2px 2px 5px rgba(56, 14, 14, 0.167); /* เพิ่มเงาให้กรอบ */
+    cursor: pointer;
   }
-  
+  .blue-block:hover {
+    transform: scale(1.01);
+}
   .logo-image {
     width: 40px; // ขนาดของโลโก้
     height: 40px; // ขนาดของโลโก้

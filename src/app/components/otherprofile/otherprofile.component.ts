@@ -8,12 +8,13 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { CommonModule } from '@angular/common';
 import { Getranktoday, ImgUser } from '../../model/Img';
+import { HeaderadmidComponent } from "../headeradmid/headeradmid.component";
 @Component({
-  selector: 'app-otherprofile',
-  standalone: true,
-  imports: [HeaderComponent,MatProgressSpinnerModule,MatProgressBarModule,CommonModule],
-  templateUrl: './otherprofile.component.html',
-  styleUrl: './otherprofile.component.scss'
+    selector: 'app-otherprofile',
+    standalone: true,
+    templateUrl: './otherprofile.component.html',
+    styleUrl: './otherprofile.component.scss',
+    imports: [HeaderComponent, MatProgressSpinnerModule, MatProgressBarModule, CommonModule, HeaderadmidComponent]
 })
 export class OtherprofileComponent implements OnInit {
   constructor(private route: ActivatedRoute,private getimgservice: Getimgservice,private catmash : CatmashService) { }
@@ -26,6 +27,7 @@ export class OtherprofileComponent implements OnInit {
   yesterdayrank : Getranktoday[] =[];
   rank : Getranktoday[] = [];
   rankold : Getranktoday[] = [];
+  isLoggedIn: boolean = false;
   async ngOnInit(): Promise<void> {
     this.route.queryParams.subscribe(params => {
        this.uid = params['uid'];
@@ -83,4 +85,25 @@ export class OtherprofileComponent implements OnInit {
     }
       }
   }
+  // isAuthenticated(): boolean {
+  //   return this.isLoggedIn;
+  // }
+
+  // // เมธอดสำหรับเข้าสู่ระบบ
+  // login(username: string, password: string): boolean {
+  //   // ตรวจสอบข้อมูลการเข้าสู่ระบบ
+  //   if (username === 'admin' && password === 'password') {
+  //     this.isLoggedIn = true;
+  //     return true;
+  //   } else {
+  //     this.isLoggedIn = false;
+  //     return false;
+  //   }
+  // }
+
+  // // เมธอดสำหรับออกจากระบบ
+  // logout(): void {
+  //   this.isLoggedIn = false;
+  // }
 }
+

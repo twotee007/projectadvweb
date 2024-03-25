@@ -59,14 +59,7 @@ export class RankingComponent implements OnInit {
         console.log(this.rank);
         }
         lookuser(uid: number) {
-            this.router.navigate(['/otherprofile'], { queryParams: { uid: uid } });
+            this.router.navigate(['otherprofile'], { queryParams: { uid: uid } });
         }
-        
-    onSelectPlayer(player: any) {
-        this.selectedPlayer = player;
-      }
-      onMouseLeave() {
-        this.selectedPlayer = null;
-    }
 }
 
