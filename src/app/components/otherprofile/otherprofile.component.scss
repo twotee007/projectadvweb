@@ -46,6 +46,12 @@
     font-family: 'Montserrat', sans-serif;
     color:  rgb(255, 255, 255);
   }
+  .card {
+    height: 100%; /* ตั้งค่าความสูงของการ์ดให้เต็มสูง */
+    display: flex; /* ใช้ Flexbox เพื่อจัดการความสูง */
+    flex-direction: column; /* จัดเรียงลักษณะคอลัมน์ */
+  }
+  
   
   .bdele:hover {
     background:  rgb(255, 0, 0);
@@ -210,4 +216,13 @@ button {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+.arrow-container {
+  display: inline-block; // ให้ลูกศรแสดงในบรรทัดเดียวกับข้อความ
+  margin-right: 5px; // ระยะห่างข้างขวาของลูกศรกับข้อความ
+}
+
+.arrow-icon {
+  width: 20px; // ปรับขนาดของลูกศรตามที่ต้องการ
+  height: 20px; // ปรับขนาดของลูกศรตามที่ต้องการ
 }

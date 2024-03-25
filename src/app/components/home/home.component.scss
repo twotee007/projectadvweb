@@ -83,13 +83,13 @@ body {
       padding: 13px;
     }
   }
-  .image-containerr{
+  .image-container{
     margin-top: 10px;
     margin: auto;
     border-radius: 20px;
     display: block;
-    width: 90%;
-    height: 150%;
+    width: 100%;
+    height: 140%;
     cursor: pointer;
     object-fit: cover;
     transition: transform 0.3s; /* เพิ่มการเปลี่ยนแปลงที่น่าสนใจเมื่อ hover */

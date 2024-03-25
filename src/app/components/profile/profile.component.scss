@@ -199,3 +199,17 @@ button {
   height: 305px;
   object-fit: cover; 
 }
+.arrow-container {
+  display: inline-block; // ให้ลูกศรแสดงในบรรทัดเดียวกับข้อความ
+  margin-right: 5px; // ระยะห่างข้างขวาของลูกศรกับข้อความ
+}
+
+.arrow-icon {
+  width: 20px; // ปรับขนาดของลูกศรตามที่ต้องการ
+  height: 20px; // ปรับขนาดของลูกศรตามที่ต้องการ
+}
+.card {
+  height: 100%; /* ตั้งค่าความสูงของการ์ดให้เต็มสูง */
+  display: flex; /* ใช้ Flexbox เพื่อจัดการความสูง */
+  flex-direction: column; /* จัดเรียงลักษณะคอลัมน์ */
+}
