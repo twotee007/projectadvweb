@@ -21,6 +21,8 @@ export class OtherprofileComponent implements OnInit {
   uid : number = 0;
   oldUser : User[] = [];
   User : User[] = [];
+  Userlogin : User[] = [];
+  admin : User[] = [];
   imgUser : ImgUser[] =[];
   imgUserold : ImgUser[] =[];
   todayrank : Getranktoday[] =[];
@@ -32,6 +34,16 @@ export class OtherprofileComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
        this.uid = params['uid'];
   });
+  if(localStorage.getItem('user')){
+    this.Userlogin = JSON.parse(localStorage.getItem('user')!);
+    console.log("User");
+    
+  }else if(localStorage.getItem('admin')){
+    this.admin = JSON.parse(localStorage.getItem('admin')!);
+    console.log("Admin");
+  }else{
+    
+  }
   this.User = await this.getimgservice.GetUser(this.uid);
   if (this.User && this.User.length > 0) {
     this.todayrank = await this.getimgservice.GetRanktoday();
