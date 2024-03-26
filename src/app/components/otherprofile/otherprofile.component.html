@@ -29,7 +29,7 @@
                         <h6 class="fontfacemash">Elo ranting : <span class="text">{{img.score}}</span></h6>
                         <h6 class="fontfacemash">Today Ranking : <span class="text">{{img.rankingtoday}}</span></h6>
                         <div class="all"
-                        [ngClass]="{'up-arrow': img.rankingtoday < img.rankingyesterday, 'down-arrow': img.rankingtoday > img.rankingyesterday}" *ngIf="admin.length > 0">
+                        [ngClass]="{'up-arrow': img.rankingtoday < img.rankingyesterday, 'down-arrow': img.rankingtoday > img.rankingyesterday}">
                         <h6 *ngIf="img.rankingyesterday && img.rankingtoday !== img.rankingyesterday">
                             <ng-container *ngIf="img.rankingtoday < img.rankingyesterday" class="arrow-container">
                                 <img src="https://media.discordapp.net/attachments/1063306270003703878/1216061406294839346/down.png?ex=65ff0470&is=65ec8f70&hm=eef8f7377ebd28846539930edd2a3fb9b3dfdb8d293e9a79f9c13c55f9819037&=&format=webp&quality=lossless&width=160&height=160"
