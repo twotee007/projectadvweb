@@ -22,6 +22,7 @@ export class HomeComponent {
 
       constructor(private router: Router , private getimg : Getimgservice,private dialog: MatDialog) {}
       allimg : GetImg[] = [];
+      imgran : GetImg[] = [];
       selectedImages: GetImg[] = [];
       votedImages: GetImg[] = [];
       imgwinner : GetImg[] = [];
@@ -32,15 +33,9 @@ export class HomeComponent {
       countdownSeconds: number = 0;
       show : boolean = true;
       isLoading: boolean = true; 
-      User : User[] = [];
       ngOnInit():void {
         this.loadImg();
-        if (localStorage.getItem('user')) {
-          this.User = JSON.parse(localStorage.getItem('user')!);
-          console.log(this.User);
-        }
       }
-
       async loadImg(){
         if (localStorage.getItem('votedImagesIds')) {
           const votedImagesIds = JSON.parse(localStorage.getItem('votedImagesIds')!);
@@ -68,7 +63,8 @@ export class HomeComponent {
         const remainingImages = this.allimg.filter(img => !this.votedImagesIds.has(img.imgid));
         this.isLoading = true;
         if (remainingImages.length >= 2) {
-          this.selectedImages = this.shuffleImages(remainingImages.slice(0, 2));
+          this.imgran = this.shuffleImages(remainingImages);
+          this.selectedImages =  this.imgran.slice(0,2);
         } else {
           this.loadImg();
         }
