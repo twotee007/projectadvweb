@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { Router, RouterModule } from '@angular/router';
 import { CatmashService } from '../../services/api/catmash.service';
+import * as bcrypt from 'bcryptjs';
 
 @Component({
   selector: 'app-profile',
@@ -48,6 +49,7 @@ export class ProfileComponent implements OnInit {
     if (userJson) {
       this.User = JSON.parse(userJson);
         this.User = await this.catmash.GetloginUser(this.User[0].uid);
+        console.log(this.User);
         if (this.User && this.User.length > 0) {
             this.editName = this.User[0].name;
             this.todayrank = await this.getimgservice.GetRanktoday();
@@ -157,13 +159,16 @@ export class ProfileComponent implements OnInit {
           this.cheacknewpass = false;
           return;
         }
-        if(oldpass === this.User[0].password){
+        const hashedoldpass = bcrypt.compareSync(oldpass, this.User[0].password);
+        console.log(hashedoldpass);
+        if(hashedoldpass){
           if(newpass === confirmnewpass){
             let cheack = await this.getimgservice.updatepass(newpass,uid);
             this.success = true;
             setTimeout(() => {
+              window.location.reload();
               this.success = false;
-          }, 5000); // 3000 milliseconds = 3 seconds
+          }, 3000); // 3000 milliseconds = 3 seconds
           }else{
             this.cheacknewpass = false;
             return;

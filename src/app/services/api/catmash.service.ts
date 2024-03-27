@@ -11,7 +11,7 @@ export class CatmashService {
 
       constructor(private constants : Constants , private http : HttpClient){}
       public async LoginUser(username: string, password: string) {
-        const url = this.constants.API_ENDPOINT + "/login/" + username + "/" + password;
+        const url = this.constants.API_ENDPOINT + "/login/user/" + username + "/" + password;
         const response = await lastValueFrom(this.http.get(url));
         return response as User[];
       }

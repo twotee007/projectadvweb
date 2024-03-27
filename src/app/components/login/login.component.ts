@@ -24,26 +24,27 @@ export class LoginComponent{
       image: File | undefined;
       imageUrl : string | undefined;
       isLoading: boolean = true; 
-      async loginuser(username: string, password: string) {
+      public async loginuser(username: string, password: string) {
         if (username.trim() === '' || password.trim() === '') {
           this.snackBar.open('Username or password is not provided.', 'Close', {
             verticalPosition: 'top',
             duration: 3000
           });
           return;
-        }else{
-           this.userlogin = await this.catmashService.LoginUser(username, password);
-        if(this.userlogin.length > 0 && this.userlogin[0].type === 'user'){
-            localStorage.setItem('user', JSON.stringify(this.userlogin));
+        } else {
+          const userlogin = await this.catmashService.LoginUser(username, password);
+          console.log(userlogin);
+          if (userlogin.length > 0 && userlogin[0].type === 'user') {
+            localStorage.setItem('user', JSON.stringify(userlogin));
             this.router.navigate(['']);
-        }else if(this.userlogin.length > 0 && this.userlogin[0].type === 'admin'){
-          localStorage.setItem('admin', JSON.stringify(this.userlogin));
+          } else if (userlogin.length > 0 && userlogin[0].type === 'admin') {
+            localStorage.setItem('admin', JSON.stringify(userlogin));
             this.router.navigate(['admin']);
-        }else{
-          this.snackBar.open('Loging failed.', 'Close', {
-            verticalPosition: 'top',
-            duration: 3000
-          });
+          } else {
+            this.snackBar.open('Loging failed.', 'Close', {
+              verticalPosition: 'top',
+              duration: 3000
+            });
           }
         }
       }
