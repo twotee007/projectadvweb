@@ -51,19 +51,28 @@ export class LoginComponent{
       
       async signup(name: string, username: string, password: string, comfirmpassword: string) {
         this.isLoading = false;
-        if(password != comfirmpassword){
-            this.snackBar.open('กรุณากรอก password กับ comfirmpassword ให้ถูกต้อง', 'Close', {
-                verticalPosition: 'top',
-                duration: 3000
-            });
-            return;
-        } else if(name.trim() === '' || username.trim() === '' || password.trim() === '' || comfirmpassword.trim() === '' || this.image !== undefined){
-            this.snackBar.open('Please fill out the information completely.', 'Close', {
-                verticalPosition: 'top',
-                duration: 3000
-            });
-            return;
-        }
+        if (password !== comfirmpassword) {
+          this.isLoading = true;
+          this.snackBar.open('กรุณากรอก password กับ comfirmpassword ให้ถูกต้อง', 'Close', {
+              verticalPosition: 'top',
+              duration: 3000
+          });
+          return;
+      } else if (name.trim() === '' || username.trim() === '' || password.trim() === '' || comfirmpassword.trim() === '') {
+          this.isLoading = true;
+          this.snackBar.open('Please fill out the information completely.', 'Close', {
+              verticalPosition: 'top',
+              duration: 3000
+          });
+          return;
+      } else if (this.image === undefined) {
+          this.isLoading = true;
+          this.snackBar.open('Please select an image.', 'Close', {
+              verticalPosition: 'top',
+              duration: 3000
+          });
+          return;
+      }
         const type = 'user';
         try {
             // ตรวจสอบว่ามีไฟล์ที่ถูกเลือกหรือไม่
