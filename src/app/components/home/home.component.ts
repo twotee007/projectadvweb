@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,NgZone  } from '@angular/core';
 import { CommonModule, getLocaleDateFormat, getLocaleDateTimeFormat } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
@@ -19,6 +19,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
+      ngZone: any;
 
       constructor(private router: Router , private getimg : Getimgservice,private dialog: MatDialog) {}
       allimg : GetImg[] = [];
@@ -49,14 +50,20 @@ export class HomeComponent {
         }
         this.allimg = this.shuffleImages(await this.getimg.Getimg());
         this.totalImages = Math.floor(this.allimg.length/2);
+        let remainingTime = localStorage.getItem('remainingTime');
         
-        this.loadNextImages();
-        this.isLoading = false;
-        setTimeout(() => {
-          this.loadNextImages();
-          this.isLoading = true;
-      }, 2000); // 3000 milliseconds = 3 seconds
-        this.show = true;
+        if (!remainingTime) {
+            this.loadNextImages();
+              this.isLoading = false;
+              setTimeout(() => {
+                this.loadNextImages();
+                this.isLoading = true;
+            }, 2000); // 3000 milliseconds = 3 seconds
+              this.show = true;
+        } else {
+          this.countdomn();
+        }
+        
       }
 
       loadNextImages() {
@@ -107,30 +114,46 @@ export class HomeComponent {
         localStorage.setItem('votedImagesCount', this.votedImagesCount.toString());
     
         if (this.votedImagesCount === this.totalImages) {
-          console.log('โหวตครบทุกรูปแล้ว');
-          this.show = false;
-          this.countdownSeconds = 5; // กำหนดเวลานับถอยหลังให้เริ่มต้นที่ 5 วินาที
-          const intervalId = setInterval(() => {
-            this.countdownSeconds--;
-        
-            if (this.countdownSeconds < 0) {
-              clearInterval(intervalId);
-              console.log('นับถอยหลังเสร็จสิ้น');
-              this.votedImagesIds.clear();
-              localStorage.removeItem('votedImagesIds'); // ลบ votedImagesIds ใน localStorage
-              this.votedImagesCount = 0;
-              localStorage.removeItem('votedImagesCount'); // ลบ votedImagesIds ใน localStorage
-              this.loadImg(); // โหลดรูปใหม่
-            }
-          }, 1000); // นับถอยหลังทุก 1000 มิลลิวินาที (1 วินาที)
-          return;
+          this.countdomn();
         }else {
           this.isLoading = false;
           setTimeout(() => {
               this.loadNextImages();
           }, 3000); // 3000 milliseconds = 3 seconds
       }
+      }
+      countdomn(){
+        console.log('โหวตครบทุกรูปแล้ว');
+        this.show = false;
 
+        let remainingTime = localStorage.getItem('remainingTime');
+        if (!remainingTime) {
+            let remainiingTime = localStorage.getItem('Timeout');
+            if (remainiingTime !== null) {
+                this.countdownSeconds = parseInt(remainiingTime);
+            } else {
+                this.countdownSeconds = 10;
+            }
+        } else {
+            this.countdownSeconds = parseInt(remainingTime);
+        }
+
+        const intervalId = setInterval(() => {
+            this.countdownSeconds--;
+
+            if (this.countdownSeconds < 0) {
+                clearInterval(intervalId);
+                console.log('นับถอยหลังเสร็จสิ้น');
+                this.votedImagesIds.clear();
+                localStorage.removeItem('votedImagesIds');
+                this.votedImagesCount = 0;
+                localStorage.removeItem('votedImagesCount');
+                localStorage.removeItem('remainingTime');
+                this.loadImg();
+            } else {
+                localStorage.setItem('remainingTime', this.countdownSeconds.toString());
+            }
+        }, 1000);
       }
       calculateKFactor(rating: number) {
         if (rating >= 0 && rating <= 600) {
@@ -159,13 +182,9 @@ export class HomeComponent {
         // คำนวณคะแนนใหม่สำหรับ winner และ loser
         const winnerNewRating = Math.round(kFactorWinner * (actualWinnerProbability - expectedwinProbability));
         const loserNewRating = Math.round(kFactorLoser * (actualLoserProbability - expectedLoserProbability));
-        console.log("winnerNewRating : "+winnerNewRating);
-        console.log("loserNewRating : "+loserNewRating);        
         const winnerra = kFactorWinner * (actualWinnerProbability - expectedwinProbability);
         this.imgwinner.push(winner);
         this.imgloser.push(loser);
-        console.log(this.imgwinner);
-        console.log(this.imgloser);
         const winnerpop = "1 / ( 1 + 10 **(("+loser.score+" - "+winner.score+") / 400)) = "+ expectedwinProbability.toFixed(2);
         const pointpop = kFactorWinner+" * (1 - "+expectedwinProbability.toFixed(2)+") = "+winnerra.toFixed(2);
 

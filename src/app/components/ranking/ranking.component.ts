@@ -33,10 +33,7 @@ export class RankingComponent implements OnInit {
     async loadPlayerRankings() {
         this.todayrank = await this.getimgservice.GetRanktoday();
         this.yesterdayrank = await this.getimgservice.GetRankyesterday();
-        console.log('Today',this.todayrank);
-        console.log("Yesterday",this.yesterdayrank);
         this.updaterank(this.todayrank,this.yesterdayrank);
-        
     }
     updaterank(todayrank: Getranktoday[], yesterdayrank: Getranktoday[]): void {
         for (let i = 0; i < todayrank.length; i++) {
@@ -56,7 +53,6 @@ export class RankingComponent implements OnInit {
             }
         }
         this.rank = this.rankold.slice(0, 10);
-        console.log(this.rank);
         }
         //ตืดเออเร่อตรงนี้นะจ้ะ
         lookuser(uid: number) {
