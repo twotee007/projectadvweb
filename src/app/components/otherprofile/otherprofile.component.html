@@ -32,11 +32,11 @@
                         [ngClass]="{'up-arrow': img.rankingtoday < img.rankingyesterday, 'down-arrow': img.rankingtoday > img.rankingyesterday}">
                         <h6 *ngIf="img.rankingyesterday && img.rankingtoday !== img.rankingyesterday">
                             <ng-container *ngIf="img.rankingtoday < img.rankingyesterday" class="arrow-container">
-                                <img src="https://media.discordapp.net/attachments/1063306270003703878/1216061406294839346/down.png?ex=65ff0470&is=65ec8f70&hm=eef8f7377ebd28846539930edd2a3fb9b3dfdb8d293e9a79f9c13c55f9819037&=&format=webp&quality=lossless&width=160&height=160"
+                                <img src="https://firebasestorage.googleapis.com/v0/b/catmash-50619.appspot.com/o/images%2F6741.png?alt=media&token=9fd63ab5-aaf1-434f-a377-caad8458e3c6"
                                     alt="Up arrow" class="arrow-icon"> {{ img.rankdifferent }}
                             </ng-container>
                             <ng-container *ngIf="img.rankingtoday > img.rankingyesterday" class="arrow-container">
-                                <img src="https://cdn-icons-png.flaticon.com/256/5548/5548156.png" alt="Down arrow"
+                                <img src="https://firebasestorage.googleapis.com/v0/b/catmash-50619.appspot.com/o/images%2F2703.png?alt=media&token=5216c745-ace3-4cd7-bcdd-10133c2f3b56" alt="Down arrow"
                                     class="arrow-icon"> {{ -img.rankdifferent }}
                             </ng-container>
                         </h6>
