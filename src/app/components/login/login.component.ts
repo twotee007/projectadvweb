@@ -57,7 +57,7 @@ export class LoginComponent{
                 duration: 3000
             });
             return;
-        } else if(name.trim() === '' || username.trim() === '' || password.trim() === '' || comfirmpassword.trim() === ''){
+        } else if(name.trim() === '' || username.trim() === '' || password.trim() === '' || comfirmpassword.trim() === '' || this.image !== undefined){
             this.snackBar.open('Please fill out the information completely.', 'Close', {
                 verticalPosition: 'top',
                 duration: 3000
