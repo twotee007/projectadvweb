@@ -13,11 +13,10 @@ import { CatmashService } from '../../services/api/catmash.service';
 export class HeaderComponent implements OnInit {
   constructor(private router: Router,private catmach : CatmashService) {}
   User : User[] = [];
-  oldUser : User[] = [];
   async ngOnInit():Promise<void> {
     if (localStorage.getItem('user')) {
-      this.oldUser = JSON.parse(localStorage.getItem('user')!);
-      this.User = await this.catmach.GetloginUser(this.oldUser[0].uid);
+      this.User = JSON.parse(localStorage.getItem('user')!);
+      this.User = await this.catmach.GetloginUser(this.User[0].uid);
       localStorage.setItem('user', JSON.stringify(this.User));
     }
   }

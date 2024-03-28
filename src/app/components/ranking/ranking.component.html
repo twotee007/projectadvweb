@@ -2,8 +2,8 @@
 <div class="ranking-container">
     <h2 class="slide-up">Top 10 Ranking</h2>
     <ul class="player-list" *ngIf="User">
-        <li class="player-item slide" *ngFor="let player of rank; let i = index" (click)="lookuser(player.uid)" >
-            <div class="player-details">
+        <li class="player-item slide" *ngFor="let player of rank; let i = index" (click)="lookuser(player.uid)">
+            <div class="player-details" matTooltip="view profile">
                 <span class="player-position">{{ i + 1 }}</span>
                 <img [src]="player.imgurl" alt="{{ player.name }}" class="player-image">
                 <div class="player-info">

@@ -1,0 +1,11 @@
+<app-headeradmid></app-headeradmid>
+<div class="photo-list">
+    <h1>Photo All</h1>
+    <div class="photo-items">
+        <ng-container *ngFor="let photo of imgs">
+            <a [routerLink]="['/otherprofile']" [queryParams]="{ uid: photo.uid }">
+                <img [src]="photo.imgurl" alt="Photo" class="photo-item" matTooltip="View profile">
+            </a>
+        </ng-container>
+    </div>
+</div>

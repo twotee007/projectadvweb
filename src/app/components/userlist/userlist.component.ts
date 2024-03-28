@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 import { HeaderadmidComponent } from "../headeradmid/headeradmid.component";
 import { Router, RouterModule } from '@angular/router';
 import { CatmashService } from '../../services/api/catmash.service';
-
+import {MatTooltipModule} from '@angular/material/tooltip'
 
 
 @Component({
@@ -13,7 +13,7 @@ import { CatmashService } from '../../services/api/catmash.service';
     standalone: true,
     templateUrl: './userlist.component.html',
     styleUrls: ['./userlist.component.scss'], // แก้ styleUrl เป็น styleUrls
-    imports: [CommonModule, HeaderadmidComponent, RouterModule]
+    imports: [CommonModule, HeaderadmidComponent, RouterModule,MatTooltipModule]
 })
 export class UserListComponent implements OnInit {
    users: User[] = []; 

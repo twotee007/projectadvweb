@@ -14,11 +14,10 @@ import { CommonModule } from '@angular/common';
 export class HeaderadmidComponent {
   constructor(private router: Router,private catmach : CatmashService) {}
   Admin : User[] = [];
-  oldadmin : User[] = [];
   async ngOnInit():Promise<void> {
     if (localStorage.getItem('admin')) {
-      this.oldadmin = JSON.parse(localStorage.getItem('admin')!);
-      this.Admin = await this.catmach.GetloginUser(this.oldadmin[0].uid);
+      this.Admin = JSON.parse(localStorage.getItem('admin')!);
+      this.Admin = await this.catmach.GetloginUser(this.Admin[0].uid);
       console.log( this.Admin);
       
       localStorage.setItem('admin', JSON.stringify(this.Admin));

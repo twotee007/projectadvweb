@@ -18,7 +18,7 @@
         <td>
           <!-- ใช้ routerLink บนรูปภาพ -->
           <a [routerLink]="['/otherprofile']" [queryParams]="{ uid: user.uid }">
-            <img *ngIf="user.image; else defaultAvatar" [src]="user.image" alt="Avatar" class="avatar">
+            <img *ngIf="user.image; else defaultAvatar" [src]="user.image" alt="Avatar" class="avatar"  matTooltip="view profile">
             <ng-template #defaultAvatar>
               <img src="https://cdn-icons-png.flaticon.com/256/3875/3875172.png" alt="Default Avatar" class="avatar">
             </ng-template>

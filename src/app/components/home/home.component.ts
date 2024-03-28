@@ -11,10 +11,11 @@ import { User } from '../../model/signup_post';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from './dialog.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule,HttpClientModule,FormsModule,MatCardModule,HeaderComponent,MatProgressSpinnerModule],
+  imports: [CommonModule,HttpClientModule,FormsModule,MatCardModule,HeaderComponent,MatProgressSpinnerModule,MatProgressBarModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })

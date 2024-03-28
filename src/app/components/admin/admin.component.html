@@ -11,7 +11,7 @@
                 <div class="value">{{Users.length}}</div>
             </div>
         </div>
-        <div  class="blue-block" routerLink="/userlist">
+        <div  class="blue-block" routerLink="/photoall">
             <img class="logo-image" src="https://cdn-icons-png.flaticon.com/256/1829/1829552.png" alt="Photo">
             <div class="text-content">
                 <div class="title">Photo All:</div>
@@ -21,6 +21,7 @@
     </div>
     <div class="welcome-message">
         <h2>countdownVoteSeconds: </h2>
-        <input type="number" [(ngModel)]="countdownImgSeconds" (change)="onCountdownChange()">
+        <input type="number" [(ngModel)]="countdownImgSeconds" (change)="onCountdownChange()" style="width: 8%;"><span style="margin-left: 5px;">Seconds</span>
     </div>
+    
 </div>

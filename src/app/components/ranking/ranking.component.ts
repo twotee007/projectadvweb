@@ -6,12 +6,13 @@ import { Getranktoday } from '../../model/Img';
 import { CommonModule } from '@angular/common';
 import { User } from '../../model/signup_post';
 import { Router, RouterModule } from '@angular/router';
+import {MatTooltipModule} from '@angular/material/tooltip'
 
 @Component({
     selector: 'app-ranking',
     standalone: true,
    
-  imports: [HeaderComponent,NgFor,CommonModule,RouterModule],
+  imports: [HeaderComponent,NgFor,CommonModule,RouterModule,MatTooltipModule],
     templateUrl: './ranking.component.html',
     styleUrls: ['./ranking.component.scss']
 })

@@ -6,6 +6,7 @@
 <body>
   <div *ngIf="countdownSeconds > 0" class="centered">
     <p>โหวตครบทุกรูปแล้วจะสามารถโหวตใหม่ได้ในเวลา: {{ countdownSeconds }} วินาที</p>
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
 </div>
     <div class="voting-container slide">
         <div *ngIf="show && selectedImages && selectedImages.length >= 2" >

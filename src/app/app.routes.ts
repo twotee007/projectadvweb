@@ -8,6 +8,7 @@ import { OtherprofileComponent } from './components/otherprofile/otherprofile.co
 // import { UserListComponent } from './components/userlist/userlist.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { UserListComponent } from './components/userlist/userlist.component';
+import { PhotoallComponent } from './components/photoall/photoall.component';
 
 export const routes: Routes = [
     {path:'',component:HomeComponent},
@@ -17,6 +18,7 @@ export const routes: Routes = [
     {path : 'graph',component:GraphComponent},
     {path : 'otherprofile',component:OtherprofileComponent},//ดึงuidเเล้วไม่ได้จ้ะ
     {path : 'admin',component:AdminComponent},
-    {path : 'userlist',component:UserListComponent}
+    {path : 'userlist',component:UserListComponent},
+    {path : 'photoall',component:PhotoallComponent}
 
 ];

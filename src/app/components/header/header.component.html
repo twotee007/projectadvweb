@@ -13,11 +13,11 @@
         <li><a routerLink="/ranking"><img src="https://cdn-icons-png.flaticon.com/256/747/747274.png" alt="Ranking">Ranking</a></li>
         <li><a routerLink="/graph"><img src="https://cdn-icons-png.flaticon.com/256/478/478544.png" alt="graph">Graph</a></li>
         <li><a routerLink="/profile"><img src="https://cdn-icons-png.flaticon.com/256/1144/1144760.png" alt="Profile">Profile</a></li>
-        <ng-container *ngIf="this.User.length; else nologin">
+        <ng-container *ngIf="User.length; else nologin">
           <li><a (click)="Logout()" style="cursor: pointer;"><img src="https://cdn-icons-png.flaticon.com/256/1828/1828427.png" alt="Logout">Logout</a></li>
         </ng-container>
         <ng-template #nologin>
-            <li><a routerLink="/login"><img src="https://cdn-icons-png.flaticon.com/256/1828/1828427.png" alt="Logout">Login</a></li>
+            <li><a routerLink="/login"><img src="https://cdn-icons-png.flaticon.com/128/1828/1828395.png" alt="Logout">Login</a></li>
         </ng-template>
       
       </ul>
