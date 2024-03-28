@@ -12,7 +12,9 @@
         <div *ngIf="show && selectedImages && selectedImages.length >= 2" >
         <mat-card>
           <mat-card-header>
-            <h3 *ngIf="isLoading">{{selectedImages[0].name}}</h3>
+            <div class="click" (click)="profile(selectedImages[0].uid)">
+              <h3 *ngIf="isLoading">{{selectedImages[0].nameimg}}</h3>
+            </div>
           </mat-card-header>
           <mat-card-content>
             <div class="image-container" *ngIf="!isLoading">
@@ -36,7 +38,9 @@
         <div *ngIf="show && selectedImages && selectedImages.length >= 2">
         <mat-card>
           <mat-card-header>
-            <h3 *ngIf="isLoading">{{selectedImages[1].name}}</h3>
+            <div class="click" (click)="profile(selectedImages[1].uid)">
+              <h3 *ngIf="isLoading">{{selectedImages[1].nameimg}}</h3>
+            </div>
           </mat-card-header>
           <mat-card-content>
             <div class="image-container" *ngIf="!isLoading">

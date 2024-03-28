@@ -4,8 +4,9 @@ export interface GetImg {
     imgid:  number;
     imgurl: string;
     uid : number;
-    name : string;
+    nameimg : string;
     score:  number;
+    nameuser : string;
     isWinner: boolean;
     isLoser: boolean;
 }

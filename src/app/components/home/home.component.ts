@@ -12,6 +12,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from './dialog.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { flush } from '@angular/core/testing';
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -36,6 +37,7 @@ export class HomeComponent {
       show : boolean = true;
       isLoading: boolean = true; 
       countdownimg: number = 0;
+      cheackloadding : boolean = true;
       ngOnInit():void {
         this.loadImg();
       }
@@ -53,7 +55,7 @@ export class HomeComponent {
         this.allimg = this.shuffleImages(await this.getimg.Getimg());
         this.totalImages = Math.floor(this.allimg.length/2);
         let remainingTime = localStorage.getItem('remainingTime');
-        
+        this.cheackloadding = false;
         if (!remainingTime) {
             this.loadNextImages();
               this.isLoading = false;
@@ -68,7 +70,12 @@ export class HomeComponent {
         
       }
 
-      loadNextImages() {
+      async loadNextImages() {
+        if(this.cheackloadding === true){
+          this.allimg = this.shuffleImages(await this.getimg.Getimg());
+          this.totalImages = Math.floor(this.allimg.length/2);
+        }
+        
         const remainingImages = this.allimg.filter(img => !this.votedImagesIds.has(img.imgid));
         this.isLoading = true;
         if (remainingImages.length >= 2) {
@@ -92,6 +99,7 @@ export class HomeComponent {
         return images;
       }
       onImageClick(winnerIndex: number) { 
+        this.cheackloadding = true;
         const winnerImage = this.selectedImages[winnerIndex]; 
         const loserIndex = winnerIndex === 0 ? 1 : 0;
         const loserImage = this.selectedImages[loserIndex];
@@ -108,7 +116,6 @@ export class HomeComponent {
         const expectedWinnerProbability = this.getExpectedScore(winnerImage.score, loserImage.score);
         const expectedLoserProbability = this.getExpectedScore(loserImage.score, winnerImage.score);
         this.updateElo(winnerImage, loserImage, expectedWinnerProbability,expectedLoserProbability);
-
         this.votedImagesIds.add(winnerImage.imgid);
         this.votedImagesIds.add(loserImage.imgid);
         localStorage.setItem('votedImagesIds', JSON.stringify(Array.from(this.votedImagesIds)));
@@ -195,16 +202,16 @@ export class HomeComponent {
         const winnerpop = "1 / ( 1 + 10 **(("+loser.score+" - "+winner.score+") / 400)) = "+ expectedwinProbability.toFixed(2);
         const pointpop = kFactorWinner+" * (1 - "+expectedwinProbability.toFixed(2)+") = "+winnerra.toFixed(2);
 
-        this.openDialog(winner.score, winner.imgurl, winnerNewRating ,winner.name,winnerpop,pointpop,loser.score,kFactorWinner,kFactorLoser);
+        this.openDialog(winner.score, winner.imgurl, winnerNewRating ,winner.nameimg,winnerpop,pointpop,loser.score,kFactorWinner,kFactorLoser);
         const checkwinner = await this.getimg.InsertVote(winner.uid, winner.imgid, winnerNewRating, winner.isWinner);
         if (checkwinner === true) {
-            winner.score = winnerNewRating + winner.score;
+            winner.score = winner.score + winnerNewRating ;
             await this.getimg.Updateimg(winner.imgid, winner.score);
         }
         
         const checkloser = await this.getimg.InsertVote(loser.uid, loser.imgid, loserNewRating, loser.isLoser);
         if (checkloser === true) {
-            loser.score = loserNewRating + loser.score;
+            loser.score =  loser.score + loserNewRating;
             await this.getimg.Updateimg(loser.imgid, loser.score);
         }
         
@@ -225,5 +232,8 @@ export class HomeComponent {
           // สามารถเพิ่มโค้ดที่ต้องการทำหลังจากปิด Dialog ได้
         });
       }
+      profile(uid: number) {
+        this.router.navigate(['/otherprofile'], { queryParams: { uid: uid } });
+        }
       
 }
