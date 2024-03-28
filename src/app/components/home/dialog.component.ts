@@ -8,7 +8,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 <div class="d-flex justify-content-center align-items-center" [@slideIn]="true">
   <div class="text-center" style="width: 100%;">
     <h1 mat-dialog-title>{{data.winnername}} Winner!!!</h1>
-    <img [src]="data.winnerImageSrc" alt="Winner Image" style="width: 300px; display: block; margin: 0 auto; border-radius: 15px;">
+  <img [src]="data.winnerImageSrc" alt="Winner Image" class="equal-image">
     <h3>Chance Win</h3>
     <h5>RWinng : <span class="red-text">{{data.winnerScore}}</span> | RLoser : <span class="red-text">{{data.loserScore}}</span></h5>
     <h5>kFactorWinner : <span class="red-text">{{data.kFactorWinner}}</span> | kFactorLoser : <span class="red-text">{{data.kFactorLoser}}</span></h5>
