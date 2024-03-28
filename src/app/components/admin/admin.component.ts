@@ -21,6 +21,7 @@ export class AdminComponent {
   oldadmin : User[] = [];
   img : GetImg[] = [];
   countdownImgSeconds: number = 10; // เวลานับถอยหลังของรูปภาพเริ่มต้นที่ 10 วินาที
+  countdownImg: number = 4; // เวลานับถอยหลังของรูปภาพเริ่มต้นที่ 10 วินาที
   async ngOnInit():Promise<void> {
     if (localStorage.getItem('admin')) {
       this.oldadmin = JSON.parse(localStorage.getItem('admin')!);
@@ -42,6 +43,15 @@ export class AdminComponent {
     localStorage.setItem('Timeout', this.countdownImgSeconds.toString());
     let remainingTime = localStorage.getItem('Timeout');
     console.log(remainingTime);
+    
+    
+  }
+  onCountdown() {
+    // ใส่การจัดการเมื่อค่า countdownImgSeconds เปลี่ยนแปลง
+    let dom = this.countdownImg * 1000;
+    localStorage.setItem('Timevote', dom.toString());
+    let remaining = localStorage.getItem('Timevote');
+    console.log(remaining);
     
     
   }

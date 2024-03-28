@@ -35,6 +35,7 @@ export class HomeComponent {
       countdownSeconds: number = 0;
       show : boolean = true;
       isLoading: boolean = true; 
+      countdownimg: number = 0;
       ngOnInit():void {
         this.loadImg();
       }
@@ -113,14 +114,19 @@ export class HomeComponent {
         localStorage.setItem('votedImagesIds', JSON.stringify(Array.from(this.votedImagesIds)));
         this.votedImagesCount += 1;
         localStorage.setItem('votedImagesCount', this.votedImagesCount.toString());
-    
+        let remaining = localStorage.getItem('Timevote');
+        if(!remaining){
+          this.countdownimg = 4000;
+        }else{
+          this.countdownimg = parseInt(remaining);
+        }
         if (this.votedImagesCount === this.totalImages) {
           this.countdomn();
         }else {
           this.isLoading = false;
           setTimeout(() => {
               this.loadNextImages();
-          }, 3000); // 3000 milliseconds = 3 seconds
+          },  this.countdownimg); // 3000 milliseconds = 3 seconds
       }
       }
       countdomn(){
