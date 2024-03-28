@@ -1,7 +1,7 @@
 <app-headeradmid></app-headeradmid>
 <div class="welcome-container">
     <div class="welcome-message">
-        <h2> Welcome admin Catmadh</h2>
+        <h2> Welcome Admin Catmadh</h2>
     </div>
     <div class="statistics-container">
         <div class="blue-block"  routerLink="/userlist">
@@ -19,11 +19,11 @@
             </div>
         </div>
     </div>
-    <div class="welcome-message">
-        <h2>countdownVoteSeconds: </h2>
+    <div class="welcome-message" style="margin-top: 20px;">
+        <h2>CountdownVoteSeconds: </h2>
         <input type="number" [(ngModel)]="countdownImgSeconds" (change)="onCountdownChange()" style="width: 8%;"><span style="margin-left: 5px;">Seconds</span>
     </div>
-    <div class="welcome-message">
+    <div class="welcome-message"style="margin-top: 20px;">
         <h2>SetTimeVoteimgSeconds: </h2>
         <input type="number" [(ngModel)]="countdownImg" (change)="onCountdown()" style="width: 8%;"><span style="margin-left: 5px;">Seconds</span>
     </div>
